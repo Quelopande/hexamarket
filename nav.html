@@ -1,0 +1,54 @@
+<div class="mobile-vr">
+    <nav class="nav container" id="nav">
+        <h2 class="logo"><span>Hexamarket</span></h2>
+        <ul class="links">
+            <li class="item">
+                <a href="/" class="link"><i class="fa-solid fa-house"></i> Home</a>
+            </li>
+            <li class="item">
+                <a href="/all" class="link"><i class="fa-solid fa-shop"></i> Elements</a>
+            </li>
+            <li class="item">
+                <a href="https://discord.hexamarket.store/" class="link"><i class="fa-brands fa-discord"></i> Discord</a>
+            </li>
+            <div class="ilinks">
+                <li class="item">
+                    <a href="/auth?<?php echo $currentURL;?>" class="link"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                </li>
+                <li class="item">
+                    <a href="/auth?signup" class="link"><i class="fa-solid fa-user-plus"></i> SignUp</a>
+                </li>
+            </div>
+        </ul>
+        <a href="#nav" class="hamburguer">
+            <span class="icon"><i class="fas fa-bars"></i></span>
+        </a>
+        <a href="#" class="close">
+            <i class="fas fa-xmark"></i>
+        </a>
+    </nav>
+</div>
+<div class="computer-vr">
+    <div class="navbar-links">
+        <h1 class="logo">Hexamarket</h1>
+        <ul>
+            <li class="link">
+                <a href="/"><i class="fa-solid fa-house"></i><span> Home</span></a>
+            </li>
+            <li class="link">
+                <a href="/all"><i class="fa-solid fa-shop"></i><span> Elements</span></a>
+            </li>
+            <li class="link">
+                <a href="https://discord.hexamarket.store/" target="_blank"><i class="fa-brands fa-discord"></i><span> Discord</span></a>
+            </li>
+            <div class="endlink">
+                <div class="login">
+                    <a href="/auth?r=<?php echo $currentURL;?>">Login</a>
+                </div>
+                <div class="register">
+                    <a href="/auth?signup">SignUp</a>
+                </div>
+            </div>
+        </ul>
+    </div>
+</div>
