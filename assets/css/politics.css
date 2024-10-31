@@ -1,0 +1,171 @@
+/*********************************************
+*
+* Copyright ©Quelopande 2024. All Rights Reserved
+* Developer: Quelopande (quelopande.netlify.app)
+* Fonts: https://fonts.google.com
+* waves and other SVG: https://app.haikei.app/
+*
+*********************************************/
+body{
+  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Kanit', sans-serif; */
+  overflow-x: hidden;  
+  background-color: #18181b;
+  color: white;
+}
+#titles{
+  font-family: "kanit",sans-serif !important;
+}
+  @keyframes rainbow {
+  0% {
+      background-position: 0 50%
+  }
+
+  50% {
+      background-position: 100% 50%
+  }
+
+  to {
+      background-position: 0 50%
+  }
+}
+.text-rainbow {
+  background: linear-gradient(90deg,red,#ff7f00,#ff0,#0f0,#00f,indigo,#9400d3);
+  background-size: 800% 800%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow 10s ease infinite!important
+}
+.logo{
+  font-family: 'Kanit', sans-serif;
+  color: white;
+  margin-bottom: 10px;
+  z-index: 2;
+}
+/* Containers */
+@keyframes rainbow {
+  0% {
+      background-position: 0 50%
+  }
+
+  50% {
+      background-position: 100% 50%
+  }
+
+  to {
+      background-position: 0 50%
+  }
+}
+.politics .text-rainbow {
+  font-family: 'Kanit', sans-serif;
+  font-size: 300%;
+  background: linear-gradient(90deg,red,#ff7f00,#ffff00,#0f0,#00f,indigo,#9400d3);
+  background-size: 800% 800%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbow 10s ease infinite!important
+}
+.politics .title{
+  font-family: 'Kanit', sans-serif;
+  font-size: 200%;
+  color: rgb(0, 0, 0);
+  margin-bottom: 10px;
+}
+.politics .subtitle{
+  color: rgb(0, 0, 0);
+  font-family: 'Kanit', sans-serif;
+  font-size: 135%;
+}
+.politics .container{
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  color: #000;
+  margin: 10px auto;
+  border-radius: 10px;
+  padding: 5px 0;
+  max-width: 800px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  align-self: center;
+  text-align: center;
+  text-decoration:double; 
+  text-overflow: unset;
+}
+.politics .container p{
+  text-align: left;
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-bottom: 1%;
+}
+.politics ul{
+  margin-left: 70px;
+  text-align: left;
+}
+.CookieDeclaration{
+  color: white;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 7%;
+}
+.politics a{
+  text-decoration: none;
+  font-weight: 600;
+  color: #a8c7fa;
+}
+.politics a:hover{
+  text-decoration: underline;
+}
+.tos{
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 40px;
+}
+.tos h1{
+  text-align: center;
+  margin-bottom: 50px;
+}
+.tos h2{
+  margin-top: 35px;
+  margin-bottom: 5px;
+}
+.tos ul{
+  margin-left: 30px;
+}
+.tos b{
+  font-weight: 600;
+}
+.tos br {
+  content: "";
+  margin: 15px;
+  display: block;
+  font-size: 24%;
+}
+.tos .language{
+  background-color: rgb(255, 255, 255);
+  color: #000;
+  padding: 15px;
+  border-radius: 16px;
+  display: block;
+  margin-bottom: 20px;
+}
+.tos .language div{
+  display: flex;
+}
+.tos .language span{
+  position: absolute;
+  right: 10%;
+}
+/* Adaptadores */
+@media (min-width: 836px) {
+    div.computer-vr{visibility: visible;}
+    div.mobile-vr{visibility: hidden;}
+}
+@media (max-width: 837px) {
+    div.computer-vr{visibility: hidden;}
+    div.mobile-vr{visibility: visible;}
+    .tos ul{
+      margin-left: 0px;
+    }
+}

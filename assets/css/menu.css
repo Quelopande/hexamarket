@@ -1,0 +1,292 @@
+/*********************************************
+*
+* Copyright ©Quelopande 2023. All Rights Reserved
+* Developer: Quelopande (quelopande.netlify.app)
+* Fonts: https://fonts.google.com
+* Waves and other SVG: https://app.haikei.app/
+*
+*********************************************/
+.logoimg{
+  width: 300px;
+}
+.logo{
+  font-family: 'Kanit', sans-serif;
+  color: white;
+  margin-bottom: 10px;
+  z-index: 2;
+}
+.mobile-vr .container{
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1200px;
+  overflow: hidden;
+}
+.mobile-vr .nav{
+  --state-close: scale(0);
+  --state-hamburguer:scale(1);
+  --state-menu: translate(-130%);
+  padding: 40px 0;
+  display: grid;
+  justify-content: space-between;
+  align-items: center;
+  grid-template-columns: repeat(2, max-content);
+}
+.mobile-vr .nav:target{
+  --state-menu: translate(0);
+  --state-close: scale(1);
+  --state-hamburguer:scale(0);
+}
+.mobile-vr .logo{
+  color: #ffffff;
+  font-size: 2.5rem;
+  z-index: 4;
+  align-content: center;
+}
+.mobile-vr .nav:target .logo{
+  color: #ffffff;
+}
+.mobile-vr .hamburguer, .close{
+  z-index: 1;
+  cursor: pointer;
+  grid-column: -2/-1;
+  grid-row: 1/2;
+  transition: .4s;
+}
+.mobile-vr .hamburguer{
+  transform: var(--state-hamburguer);
+}
+.mobile-vr .close{
+  transform: var(--state-close);
+  font-size: 23px;
+  color: #fff;
+  text-decoration: none;
+}
+.mobile-vr .icon{
+  font-size: 23px;
+  color: #ffffff;
+  background: #2200ffaa;
+  padding-top: 8px;
+  padding-bottom: 7px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 7px;
+  text-decoration: none;
+}
+.mobile-vr .icon:hover{
+  background: #3a1cff;
+  transition: 1.5s;
+}
+.mobile-vr .links{
+  background-color: #000;
+  height: 700px;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: -85px;
+  border-radius: 10px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  gap: 7%;
+  padding-left: 5%;
+  padding-top: 260px;
+  transform: var(--state-menu);
+  transition: .3s transform;
+  z-index: 1;
+}
+.mobile-vr .item{
+  list-style: none;
+  font-size: 110%;
+}
+.mobile-vr .link{
+  align-content: center;
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+  font-size: auto;
+}
+.mobile-vr .link:hover{
+  background-color: #462bf7;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  transition: 1s;
+}
+.mobile-vr .ilinks{
+  margin-top: 25px;
+}
+.mobile-vr .ilinks .item{
+  background-color: #2200ff86;
+  border-radius: 10px;
+  padding-top: 14px;
+  border-radius: 10px;
+  text-align: center;
+  padding-bottom: 14px;
+  margin-top: 20px;
+  margin-right: 5%;
+}
+.mobile-vr .ilinks .item:hover{
+  background-color: #462bf7;
+  transition: 1s;
+}
+.mobile-vr .ilinks .item a{
+  display: block;
+  padding: 0;
+}
+.mobile-vr .links:hover .close{
+  position: fixed;
+}
+.mobile-vr .links:hover .logo{
+  position: fixed;
+}
+.mobile-vr .dropdown-content{
+  width: 94%;
+}
+.mobile-vr .dropdown:hover .links{
+  padding-bottom: 100px;
+}
+/* Ordenador menú */
+.computer-vr .navbar-links{
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  transform: translateX(-50%);
+  z-index: 1;
+  background-color: #ffffff;
+  justify-content: center;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  border-radius: var(--standard-border-radious);
+  top: 0%;
+  left: 50%;
+  height: 110px;
+  width: 100%;
+}
+.computer-vr .logo{
+  font-family: 'Kanit', sans-serif;
+  color: #000000;
+  align-self: start;
+  margin-left: 50px;
+  position: relative;
+  font-size: 200%;
+}
+.computer-vr ul{
+  margin-top: -44px;
+  list-style-type: none;
+  position: relative;
+  margin-left: 200px;
+}
+.computer-vr li{
+  float: left;
+}
+.computer-vr a{
+  color: #5f6368;
+  font-size: 18px;
+  text-decoration: none;
+  padding: 10px;
+}
+.computer-vr li .dropdown-content a{
+  color: white;
+  font-size: 18px;
+  text-decoration: none;
+  padding: 1px;
+}
+.computer-vr a:hover{
+  color: #000;
+  background-color: #ececec86;
+  text-decoration: none !important;
+  font-weight: 400!important;
+  border-radius: var(--standard-border-radious);
+}
+.computer-vr a:active{
+  background-color: #c5c5c5b9;
+}
+.computer-vr a:hover i{
+  font-weight: 540;
+}
+.computer-vr #inpage{
+  background-color: #343434;
+  color: white;
+  border-radius: 10px;
+}
+.computer-vr .dropdown:hover i{
+  font-weight: bold;
+}
+/* Dropdown */
+.dropdown img{
+  height: 20px;
+  margin-top: 2px;
+  margin-right: 5px;
+}
+.dropdown-content {
+  display: none;
+  position: none;
+  font-size: 110%;
+  background-color: #ffffff;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 5px 10px;
+  z-index: 1;
+  border-radius: 6px;
+}
+.dropdown-content a{
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  text-decoration: none;
+  padding-top: 2px;
+}
+.dropdown-content a{
+  color: #000000 !important;
+}
+.dropdown-content a:hover{
+  border-radius: 5px;
+  text-align: center;
+  background-color: #dadada;
+  transition: all 0.6s;
+}
+.dropdown:hover .dropdown-content{
+  display: block;
+}
+#icon{
+  padding-left: 3px;
+  padding-right: 3px;
+}
+.endlink{
+  font-size: 18px;
+  display: flex;
+  position: absolute;
+  right: 10px;
+}
+.endlink div a{
+  color: black;
+  padding-left: 20px;
+  padding-right: 20px;
+  text-align: center;
+  border-radius: var(--standard-border-radious);
+}
+.endlink .register a{
+  border: var(--blue) solid 2px;
+  transition: all 0.3s;
+  margin-left: 10px;
+}
+.endlink .register a:hover{
+  background-color: var(--blue);
+  color: white;
+}
+@media (min-width: 1000px) {
+  div.computer-vr{visibility: visible;}
+  div.mobile-vr{visibility: hidden;}
+  .dropdown-content{position: absolute;}
+}
+@media (max-width: 1000px) {
+  div.computer-vr{visibility: hidden;}
+  div.mobile-vr{visibility: visible;}
+}

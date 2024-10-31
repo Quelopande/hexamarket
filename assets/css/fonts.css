@@ -1,0 +1,96 @@
+/*********************************************
+*
+* Copyright ©Quelopande 2023. All Rights Reserved
+* Fonts: https://fonts.google.com
+* Waves and other SVG: https://app.haikei.app/
+*
+*********************************************/
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+@font-face {
+    font-family: 'Kanit';
+    font-style: normal;
+    font-weight: 500;
+    src: url('/assets/fonts/Kanit-Bold.ttf');
+  }
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/assets/fonts/Montserrat-Regular.ttf');
+  }
+  @font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/assets/fonts/Poppins-Regular.ttf');
+  }
+  @font-face {
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: 400;
+    src: url('/assets/fonts/Poppins-Italic.ttf');
+  }
+  @font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    src: url('/assets/fonts/Poppins-Medium.ttf');
+  }
+  @font-face {
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: 500;
+    src: url('/assets/fonts/Poppins-MediumItalic.ttf');
+  }
+  @font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    src: url('/assets/fonts/Poppins-SemiBold.ttf');
+  }
+  @font-face {
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: 600;
+    src: url('/assets/fonts/Poppins-SemiBoldItalic.ttf');
+  }
+  @font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    src: url('/assets/fonts/Poppins-Bold.ttf');
+  }
+  @font-face {
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: 700;
+    src: url('/assets/fonts/Poppins-BoldItalic.ttf');
+  }
+ :root{
+  --background-page: #131314;
+  --background-primary: #1e1f20;
+  --txt-color: white;
+  --txt-color-smooth: #cecece;
+  --background-primary-hover: #2a2a2a;
+  --border-primary: rgb(101, 101, 101);
+  --ad: rgb(255, 81, 0);
+  --shadow-soft: 0 10px 10px 0 rgb(16, 16, 16);
+  --green: #03b000;
+  --blue: #4c35ff;
+  --blue-hover: #2929a4;
+  --standard-border-radious: 16px;
+}
+body{
+  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Permanent Marker', cursive; */
+  /* font-family: 'Kanit', sans-serif; */
+  overflow-x: hidden;
+  background-color: var(--background-page);
+}
+ins{
+  margin-top: 40px;
+  margin: 20px;
+}

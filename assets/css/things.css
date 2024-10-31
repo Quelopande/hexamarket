@@ -1,0 +1,276 @@
+/*********************************************
+*
+* Copyright ©Quelopande 2023. All Rights Reserved
+* Developer: Quelopande (quelopande.netlify.app)
+* Fonts: https://fonts.google.com
+* Waves and other SVG: https://app.haikei.app/
+*
+*********************************************/
+/* Things */
+body{
+  margin: 0 10% 0 10%;
+}
+.things{
+  margin-left: 20px;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.things .img{
+  background-image: url("../media/bg-things.png");
+  height: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  color: white;
+  padding-top: 10%;
+}
+.things .img img{
+  border-radius: var(--standard-border-radious);
+  height: 300px;
+  margin-top: -100px;
+}
+.things .information h1{
+  color:#fff;
+}
+.things .information .section h4{
+  color: #ffffff;
+  text-align: left;
+  font-size: 17px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 10px;
+  margin-top: -20px;
+}
+.things .information .btn-section{
+  color: #ffffff;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  text-align: start;
+  cursor: pointer;
+  font-weight: normal;
+  display: flex;
+}
+.things .information .section:hover{
+  background: var(--background-primary-hover) !important;
+}
+.things .information .btn-section i{
+  margin-top: 5px;
+  font-size: 23px;
+  margin-left: auto; 
+} 
+.information .sections > .section:not(:first-child):not(:last-child) {
+  background: var(--background-primary);
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.information .sections > .section:first-child{
+  background: var(--background-primary);
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: var(--standard-border-radious) var(--standard-border-radious) 0px 0px;
+}
+.information .sections> .section:last-child {
+  background: var(--background-primary);
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 0px 0px var(--standard-border-radious) var(--standard-border-radious);
+}
+.things .information a{
+  text-decoration: none;
+  font-weight: 600;
+  color: #a8c7fa;
+}
+.things a:hover{
+  text-decoration: underline;
+}
+.things .download-btn{
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 16px;
+  border-radius: var(--standard-border-radious);
+  background-color: rgb(66, 66, 255);
+  transition: all 0.2s ease;
+  --color: #ffffff;
+  --hover: #2929a4;
+  font-size: 20px;
+  margin-top: 60px;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: inline;
+  text-align: center;
+}
+.things .download-btn:hover{
+  box-shadow: inset 0 -3.25em 0 0 var(--hover);
+}
+.things .download-btn .text{
+  padding-left: 30px;
+}
+
+.things .wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  position: relative;
+  margin: 0;
+  margin-top: 150px;
+  left: 50%;
+  transform: translate(-50%, -80%);
+}
+
+.things .wrapper i.button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 36px;
+  width: 36px;
+  background-color: rgba(54, 54, 54, 0.659);
+  border-radius: 100px;
+  text-align: center;
+  line-height: 36px;
+  color: #fff;
+  font-size: 15px;
+  transition: all 0.3s linear;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.things i.button:active {
+  transform: scale(0.94) translateY(-50%);
+}
+
+.things i#prev {
+  left: 25px;
+}
+
+.things i#next {
+  right: 25px;
+}
+
+.things .image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 320px;
+  max-width: 450px;
+  width: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.things .image-container .carousel {
+  display: flex;
+  transition: all 0.4s ease;
+}
+
+.things .carousel img {
+  width: 100%;
+  margin-top: 0px;
+  object-fit: cover;
+  border-radius: 18px;
+  height: auto;
+}
+.section .active {
+  animation: slideDown 0.3s ease-out forwards;
+}
+@keyframes slideDown {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+  to {
+    max-height: 1000px; /* Ajusta esto según el contenido de tu sección */
+    opacity: 1;
+  }
+}
+.pubName a{
+    display: inline-block;
+    text-align: left;
+    margin-left: -10px;
+    padding: 10px;
+    cursor: pointer;
+    background: red;
+    border-radius: var(--standard-border-radious);
+    background: var(--background-primary);
+  border: solid 2px var(--background-primary-hover);
+}
+.pubName a:hover{
+  background: var(--background-primary-hover);
+}
+.pubName a:active{
+  border: solid 1px white inherit;
+}
+/* Non auto ad */
+.affiliate{
+  text-align: center;
+  background-image: linear-gradient(-225deg, #ff0000 0%, #562B7C 52%, #0095ff 100%);
+  border-radius: var(--standard-border-radious);
+  margin-top: 50px;
+  margin-left: 30px;
+  margin-right: 30px;
+  text-decoration: none !important;
+  color: white !important;
+}
+.affiliate:hover{
+  cursor: pointer;
+}
+.affiliate p{
+  font-size: 17px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.affiliate h1{
+  margin-top: 25px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+.patreon{
+  background-image:-webkit-linear-gradient(left bottom, #6d327c, #485DA6, #00a1ba, #00BF98, #36C486);
+  /*   background:-webkit-linear-gradient(left bottom, #38438b, #944b94, #d75a88, #ff7e71, #ffb25f, #ffeb68); */
+  margin-left: 30px !important;
+  margin-right: 30px !important;
+}
+/* Image enlargered */
+.overlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.687);
+}
+.img-enlarged {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+}
+.patreon{
+  margin-right: 5%;
+  margin-left: 5%;
+}
+/* Adaptadores */
+@media (max-width: 837px) {
+    .things .img img{height: 50%;}
+    .things{margin-top: 100px;}
+    .things .wrapper {margin-top: 220px;}
+    .things i#prev {left: 0px;}.things i#next {right: 0px;}
+    .information h1{
+    margin-top: -100px;}
+    #bottom{flex-wrap: wrap;}
+    body{
+      margin: 0;
+    }
+}

@@ -1,0 +1,83 @@
+/*********************************************
+*
+* Copyright ©Quelopande 2023. All Rights Reserved
+* Developer: Quelopande (quelopande.netlify.app)
+* Fonts: https://fonts.google.com
+* Waves and other SVG: https://app.haikei.app/
+*
+*********************************************/
+
+ /* Bottom*/
+#bottom{
+  margin-top: -10px;
+  padding-top: 20px;
+  display: flex;
+  padding-bottom: 20px;
+  flex-wrap: wrap;
+  font-family: 'Poppins', sans-serif;
+}
+/* Notification */
+/* Image enlargered */
+/* About */
+.about .large{
+  margin-top: 20px!important;
+  background-color: #ffffff0d;
+  border: solid 1px #4e4e4e; /* 00693d */
+  color: #ffffff;
+  padding: 70px;
+  border-radius: 30px;
+  display: block;
+  margin: 0 10% 0 10%;
+}
+.about .large h3{
+  font-weight: 400;
+  margin-top: 13px;
+}
+.about i{
+  color: #22ce00;
+}
+.about .small{
+  display: flex;
+  margin-top: 20px;
+}
+.about .small .box{
+  color: white;
+  padding: 70px;
+  width: 40%;
+  border-radius: 30px;
+  display: block;
+  margin: 0 10% 0 10%;
+}
+.about .small .box:nth-child(1){
+  background-color: #4c35ff;
+  margin-right: 50px;
+}
+.about .small  .box:nth-child(2){
+  background-color: #03b000;
+  margin-left: 50px;
+}
+.about .small .box h3{
+  margin-top: 10px;
+}
+.about .us{
+  margin-top: 20px!important;
+  background-color: #ffffff0d;
+  border: solid 1px #4e4e4e; /* 00693d */
+  color: #ffffff;
+  padding: 70px;
+  border-radius: 30px;
+  display: block;
+  margin: 0 10% 0 10%;
+}
+/* Cookie */
+/* User perfil */
+/* Adaptadores */
+@media (max-width: 1400px) {.about .small .box{margin: 0 2% 0 2%; width: 100%;}.about .small .box:nth-child(1){margin-right: 10px;}.about .large{margin: 0 2% 0 2%;}.about .us{margin: 0 2% 0 2%;}}
+@media (max-width: 837px) {
+    #bottom{flex-wrap: wrap;}
+    .about .small{display: block; }
+    .about .small .box{width: 96%; margin: 0 2% 20px 2%; padding: 50px;}
+    .about .small .box:nth-child(2){width: 96%; margin-left: 2%; padding: 50px;}
+    .about .large{width: 96%;margin: 0 2% 0 2%; padding: 40px;}
+    .about .us{width: 96%;margin: 0 2% 0 2%; padding: 45px;}
+}

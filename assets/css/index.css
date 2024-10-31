@@ -1,0 +1,174 @@
+/*********************************************
+*
+* Copyright ©Quelopande 2023. All Rights Reserved
+* Developer: Quelopande (quelopande.netlify.app)
+* Fonts: https://fonts.google.com
+* Waves and other SVG: htts://app.haikei.app/
+*
+*********************************************/
+*{
+  margin: 0;
+  box-sizing: border-box;
+}
+body{
+margin-left: -10px;
+}
+.index .hero{
+margin-right: 60px;
+margin-left: 12%;
+height: 45vh;
+}
+.index .hero h2{
+font-size: 50px;
+color: #ffffff;
+margin-bottom: 20px;
+margin-top: -50px;
+}
+a{ text-decoration: none;
+}
+.index .hero a{
+border-radius: 14px;
+padding-top: 9px;
+padding-bottom: 9px;
+color: white;
+width: 250px;
+margin-left: 2%;
+}
+.index .hero .abtn{
+display: flex;
+flex-wrap: wrap;
+}
+.abtn a{
+height: 100%;
+width: 100%;
+}
+.abtn .login{
+box-shadow: 0px 0px 50px var(--blue);
+padding: 15px 30px 15px 30px;
+font-size: 18px;
+font-weight: 900;
+margin-right: 20px;
+border-radius: var(--standard-border-radious);
+background-color: var(--blue);
+}
+.abtn .displayAll{
+box-shadow: 0px 0px 50px rgb(25, 25, 25);
+padding: 15px 30px 15px 30px;
+font-size: 18px;
+font-weight: 900;
+margin-right: 20px;
+border-radius: var(--standard-border-radious);
+background-color: rgb(25, 25, 25);
+}
+.index .hero .container{
+border-radius: 7px;
+padding-top: 2%;
+padding-bottom: 2%;
+margin-bottom: 2%;
+margin-top: 18%;
+}
+.index section{
+margin-left: 10px;
+background-color: var(--background-page);
+padding-bottom: 30px;
+}
+.index section .float{
+color: rgb(243, 243, 243);
+background: linear-gradient(0deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 100%), url('https://media.discordapp.net/attachments/1018100830785773650/1290774417055551671/bg.png?ex=66fdaeda&is=66fc5d5a&hm=dc14977abdeb18cca8727f3c10bc9f7b9b3cee5a981966bac47e98151979a9aa&=&format=webp&quality=lossless&width=1193&height=671');
+background-repeat: no-repeat;
+background-size: cover;
+background-position: center;
+position: absolute;
+display: flex;
+flex-direction: row;
+width: 80%;
+margin-left: 10%;
+margin-top: -35px;
+border-radius: 16px;
+padding: 30px;
+}
+.index section .float .btn{
+font-size: 17px;
+position: absolute;
+margin-top: 17px;
+right: 40px;
+}
+.index section .float .btn a{
+background-color: rgb(36, 160, 1);
+color: white;
+padding: 10px 40px 10px 40px;
+border-radius: 16px;
+}
+.index section .info{
+padding-top: 90px;
+margin-left: 10%;
+margin-right: 10%;
+}
+.index section .info div{
+margin-top: 100px;
+margin-bottom: 50px;
+}
+.index section .info div::after {
+content: "";
+display: table;
+clear: both;
+}
+.index section .info h1{
+color: rgb(233, 233, 233);
+font-size: 50px;
+}
+.index section .info p{
+margin-bottom: 20px;
+color: rgb(179, 179, 179);
+font-size: 18px;
+}
+.index section .info img{
+width: 600px;
+border-radius: var(--standard-border-radious);
+}
+.index section .info a{
+background-color: white;
+color: black;
+padding: 7px;
+border-radius: 16px;
+}
+.rightfloat{
+float: right;
+margin-left: 200px;
+}
+.leftfloat{
+float: left;
+margin-right: 200px;
+}
+/* Adaptadores */
+@media (max-width: 837px) {
+.index .hero{height: 50vh; margin-top: 200px;}
+.index .hero h2{font-size: 30px;}
+.index .hero{margin-right: 10%;margin-left: 10%;}
+.index section .info img{width: 100% !important; height: auto; margin-bottom: 20px!important; margin-top: 40px;}
+.leftfloat{float: none;margin-right: 0px;}
+.rightfloat{float: none;margin-left: 0px;}
+.index section .float h1{margin-bottom: 10px;}
+.index section .float .btn{left: 10%;bottom: 0;}
+.index section .float .btn a{padding: 10px 40% 10px 40%;}
+.index section .float{padding-bottom: 50px;}
+}
+@media (max-width: 1550px) {
+.index section .info h1{font-size: 40px;}
+.index section .info p{font-size: 16px;}
+.index section .info img{width: 450px;}
+.leftfloat{float: left;margin-right: 5%}
+.rightfloat{float: right;margin-left: 5%;}
+}
+@media (max-width: 1020px) {
+.leftfloat{float: left;margin-right: 5%;}
+.rightfloat{float: right;margin-left: 5%;}
+.index section .info img{width: 50%; margin-bottom: 100px;}
+}
+@media (max-width: 600px) {
+.index .hero h2{font-size: 25px;}
+.index .hero .abtn{margin-bottom: 20vh;}
+.index .hero .abtn div{
+margin-top: 20px;
+}
+}
