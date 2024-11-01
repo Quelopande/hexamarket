@@ -1,0 +1,35 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "banner": 1,
+            "visibility": [
+                "true",
+                "true",
+                "true",
+                "true"
+            ],
+            "articles": [
+                {
+                    "articleId": 1,
+                    "articleName": "hola",
+                    "category": "mc",
+                    "tags": [
+                        "vxvxvxcvxcvxcvx"
+                    ],
+                    "status": null,
+                    "sections": [
+                        {
+                            "title": "sdsdsda",
+                            "description": "sdsdsdasdsdsdasdsdsdasdsdsda"
+                        }
+                    ],
+                    "date": "2024-08-22 17:43:51",
+                    "file": "https:\/\/hexamarket.store\/download\/1.zip",
+                    "img": null,
+                    "price": "1.00"
+                }
+            ]
+        }
+    ]
+}
