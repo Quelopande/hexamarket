@@ -1,9 +1,11 @@
+<!-- * Copyright ©Quelopande 2024. All Rights Reserved
+* Developer: Quelopande (quelopande.netlify.app) -->
 <?php
-// * Copyright ©Quelopande 2024. All Rights Reserved
-// * Developer: Quelopande (quelopande.netlify.app)
 session_start();
 
 require "keys.php";
+$show2FAForm = false;
+$errors = '';
 
 function encryptCookie($data) {
     global $cookieEncryptKey;
@@ -22,7 +24,6 @@ function decryptCookie($data) {
     return openssl_decrypt($ciphertext, 'aes-256-gcm', $cookieEncryptKey, 0, $iv, $tag);
 }
 
-// Check for an existing cookie
 if (isset($_COOKIE['user'])) {
     $decryptedUser = decryptCookie($_COOKIE['user']);
     if ($decryptedUser) {
@@ -31,13 +32,13 @@ if (isset($_COOKIE['user'])) {
         exit;
     }
 }
+
 require "vendor/dbMail.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = htmlspecialchars(strtolower(trim($_POST['user'])), ENT_QUOTES, 'UTF-8');
     $password = trim($_POST['password']);
     
-    $errors = '';
     require 'recaptcha.php';
 
     if (empty($user) || empty($password)) {
@@ -62,14 +63,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if ($errors === '') {
-        $encryptedCookieValue = encryptCookie($user);
-        setcookie('user', $encryptedCookieValue, time() + 15 * 24 * 60 * 60, '/', '', true, true); // 15 days cookie
+        $totpStatement = $connection->prepare('SELECT totpSecret, totpKey, totpIv, totpTag FROM usersTotp WHERE id = :id LIMIT 1');
+        $totpStatement->execute([':id' => $result['id']]);
+        $totpResult = $totpStatement->fetch();
 
-        $_SESSION['user'] = $user;
+        if ($totpResult) {
+            $show2FAForm = true;
+            require_once 'GoogleAuthenticator.php';
+            $ga = new PHPGangsta_GoogleAuthenticator();
 
-        header("Location: /");
+            if (isset($_POST['code1'], $_POST['code2'], $_POST['code3'], $_POST['code4'], $_POST['code5'], $_POST['code6'])) {
+                $oneCodeInput = trim($_POST['code1'] . $_POST['code2'] . $_POST['code3'] . $_POST['code4'] . $_POST['code5'] . $_POST['code6']);
+                $cypherMethod = 'AES-256-GCM';
+                $encryptedData = base64_decode($totpResult['totpSecret']);
+                $key = $totpResult['totpKey'];
+                $iv = $totpResult['totpIv'];
+                $tag = $totpResult['totpTag'];
+                $ciphertext = substr($encryptedData, 28);
 
-        exit;
+                $secret = openssl_decrypt($ciphertext, $cypherMethod, $key, $options = 0, $iv, $tag);
+                $checkResult = $ga->verifyCode($secret, $oneCodeInput, 2);
+
+                if ($checkResult) {
+                    echo 'Código correcto. Autenticación exitosa.';
+                    $encryptedCookieValue = encryptCookie($user);
+                    setcookie('user', $encryptedCookieValue, time() + 15 * 24 * 60 * 60, '/', '', true, true); // 15 days cookie
+                    $_SESSION['user'] = $user;
+                    header("Location: /");
+                    exit;
+                } else {
+                    $errors .= '<div class="alert alert-danger d-flex align-items-center" role="alert">Incorrect code. Try again.</div>';
+                }
+            }
+        } else {
+            $encryptedCookieValue = encryptCookie($user);
+            setcookie('user', $encryptedCookieValue, time() + 15 * 24 * 60 * 60, '/', '', true, true); // 15 days cookie
+            $_SESSION['user'] = $user;
+            header("Location: /");
+            exit;
+        }
     }
 }
 

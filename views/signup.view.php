@@ -34,7 +34,7 @@
 			margin-top: 15vh;
 			background: white;
 			width: 500px;
-			border-radius: 25px;
+			border-radius: 36px;
 			padding: 40px 30px 40px 30px;
 		}
 		.btn{

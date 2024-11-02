@@ -32,7 +32,7 @@
 			margin-top: 25vh;
 			background: white;
 			width: 500px;
-			border-radius: 34px;
+			border-radius: 36px;
 			padding: 40px 30px 40px 30px;
 		}
 		.btn{
@@ -61,7 +61,6 @@
 			gap: 10px;
 			justify-content: center;
 		}
-
 		.otp-input {
 			border: solid 1px #797979;
 			width: 50px;
@@ -73,7 +72,6 @@
 			outline: none;
 			transition: background-color 0.5s;
 		}
-
 		.otp-input:focus {
 			border: solid 1px #c0c0c0 !important;
 			background-color: #c0c0c0;
@@ -113,12 +111,12 @@
 				</div>
 			<?php endif; ?>
 		<div class="otp-container">
-			<input type="text" name="code1" class="otp-input" maxlength="1" required="" pattern="\d{6}">
-			<input type="text" name="code2" class="otp-input" maxlength="1" required="" pattern="\d{6}">
-			<input type="text" name="code3" class="otp-input" maxlength="1" required="" pattern="\d{6}">
-			<input type="text" name="code4" class="otp-input" maxlength="1" required="" pattern="\d{6}">
-			<input type="text" name="code5" class="otp-input" maxlength="1" required="" pattern="\d{6}">
-			<input type="text" name="code6" class="otp-input" maxlength="1" required="" pattern="\d{6}">
+			<input type="text" name="code1" class="otp-input" maxlength="1" required>
+			<input type="text" name="code2" class="otp-input" maxlength="1" required>
+			<input type="text" name="code3" class="otp-input" maxlength="1" required>
+			<input type="text" name="code4" class="otp-input" maxlength="1" required>
+			<input type="text" name="code5" class="otp-input" maxlength="1" required>
+			<input type="text" name="code6" class="otp-input" maxlength="1" required>
 		</div>
 		<button class="btn" type="submit" name="submit">Submit form</button><br>
 		<button name="sendEmail" class="sendEmail">Send the email again</button>

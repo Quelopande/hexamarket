@@ -34,7 +34,7 @@
 			margin-top: 25vh;
 			background: white;
 			width: 500px;
-			border-radius: 25px;
+			border-radius: 36px;
 			padding: 40px 30px 40px 30px;
 		}
 		.btn{
@@ -78,12 +78,59 @@
 		.alert{
 			margin-left: -30px;
 		}
+		.sth{
+			position:absolute;
+			background: #00000078;
+			width: 100%;
+			margin-left: -10px;
+			height: 100%;
+			z-index: 90;
+			font-size: 0;
+		}
+		.otp-container {
+			display: flex;
+			margin-top: 20px;
+			gap: 10px;
+			justify-content: center;
+		}
+		.otp-input {
+			border: solid 1px #797979;
+			width: 50px;
+			height: 50px;
+			font-size: 2rem;
+			text-align: center;
+			border-radius: 10px;
+			background-color: #e5e5e5;
+			outline: none;
+			transition: background-color 0.5s;
+		}
+		.otp-input:focus {
+			border: solid 1px #c0c0c0 !important;
+			background-color: #c0c0c0;
+			border-color: #000;
+		}
+		.otpform{
+			left: -20px;
+			right:-20px;
+			top: -15vh;
+			padding: 40px;
+			border-radius: 26px;
+			z-index: 100;
+			position: absolute;
+			background: white;
+			border: solid 1px black;
+		}
 		@media (max-width: 837px) {
-			.form{
-			margin-top: 15vh;
-			}
+			.form{margin-top: 15vh;}
+		}
+		@media (max-width: 437px) {
+			.otp-input{width: 35px; height: 35px; font-size: 1.3rem;}
+			.otp-container {gap: 5px;}
 		}
 	</style>
+	<?php if ($show2FAForm): ?>
+		<div class="sth">s</div>
+	<?php endif; ?>
 		<form class="needs-validation was-validated form" novalidate="" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST">
 			<h1 class="title">Login</h1>	
 			<?php if(!empty($errors)): ?>
@@ -115,6 +162,23 @@
 		You don't have an account? <a href="/register">Sign Up</a>
 		<br>
 		<p>By logging in, you agree to <a href="/politics/tos">Terms of Use</a> and <a href="/politics/privacypolicy">Privacy Policy</a></p>
+		<?php if ($show2FAForm): ?>
+		<form action="" method="post" class="otpform">
+			<h1>2 factor authentication code</h1>
+			<input type="hidden" name="user" value="<?php echo htmlspecialchars($user); ?>">
+			<input type="hidden" name="password" value="<?php echo htmlspecialchars($password); ?>">
+			<input type="hidden" name="token" id="token2FA" />
+			<div class="otp-container">
+				<input type="text" name="code1" class="otp-input" maxlength="1" required>
+				<input type="text" name="code2" class="otp-input" maxlength="1" required>
+				<input type="text" name="code3" class="otp-input" maxlength="1" required>
+				<input type="text" name="code4" class="otp-input" maxlength="1" required>
+				<input type="text" name="code5" class="otp-input" maxlength="1" required>
+				<input type="text" name="code6" class="otp-input" maxlength="1" required>
+			</div>
+		<button type="submit" class="btn">Login and verify 2fa code</button>
+		</form>
+		<?php endif; ?>
 		<h>Get back to the <a href="/">homepage</a></h4>
 		<script>
 			let moreBtn = document.getElementById('morebtn');
@@ -126,16 +190,34 @@
 				brand.style.display = "flex ";
 			});
 		</script>
-		<script>
-		console.log(grecaptcha);
-        grecaptcha.ready( function(){
-            grecaptcha.execute( 
-                '<?php echo $keys['public']; ?>',{ action: 'form' }
-            ).then( function( responseToken ){
-            	let inputToken = document.getElementById('token');
-                inputToken.value = responseToken;
-            })
-        });
+	<script>
+		function loadRecaptchaToken(tokenId) {
+			grecaptcha.ready(function() {
+				grecaptcha.execute('<?php echo $keys['public']; ?>', { action: 'form' }).then(function(responseToken) {
+					document.getElementById(tokenId).value = responseToken;
+				});
+			});
+		}
+
+		loadRecaptchaToken('token');
+		<?php if ($show2FAForm): ?>
+			loadRecaptchaToken('token2FA');
+		<?php endif; ?>
+	</script>
+	<script>
+		document.querySelectorAll('.otp-input').forEach((input, index, inputs) => {
+			input.addEventListener('input', () => {
+				if (input.value.length === 1 && index < inputs.length - 1) {
+					inputs[index + 1].focus();
+				}
+			});
+
+			input.addEventListener('keydown', (event) => {
+				if (event.key === 'Backspace' && input.value.length === 0 && index > 0) {
+					inputs[index - 1].focus();
+				}
+			});
+		});
 	</script>
 </body>
 </html>
