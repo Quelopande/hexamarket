@@ -176,7 +176,7 @@
 				<input type="text" name="code5" class="otp-input" maxlength="1" required>
 				<input type="text" name="code6" class="otp-input" maxlength="1" required>
 			</div>
-		<button type="submit" class="btn">Login and verify 2fa code</button>
+		<button type="submit" class="btn">Login and verify 2FA code</button>
 		</form>
 		<?php endif; ?>
 		<h>Get back to the <a href="/">homepage</a></h4>

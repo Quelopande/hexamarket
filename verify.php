@@ -59,7 +59,14 @@ require 'connection.php';
             if (json_last_error() !== JSON_ERROR_NONE) {
                 throw new Exception('Invalid JSON format in content.json');
             }
-
+            $existingUserIndex = null;
+            foreach ($jsonData['users'] as $index => $existingUser) {
+                if ($existingUser['id'] === $result['id']) {
+                    $existingUserIndex = $index;
+                    break;
+                }
+            }
+            
             $newUser = [
                 "id" => $result['id'],
                 "banner" => 1,
@@ -73,7 +80,9 @@ require 'connection.php';
                 "articles" => []
             ];
 
-            $jsonData['users'][] = $newUser;
+            if ($existingUserIndex == null) {
+                $jsonData['users'][] = $newUser;
+            }
             $newJson = json_encode($jsonData, JSON_PRETTY_PRINT);
             if (file_put_contents('content.json', $newJson) === false) {
                 throw new Exception('Unable to write to content.json');
