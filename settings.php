@@ -192,7 +192,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
 }
 
+if($_GET['setbanner'] || $_GET['theme']){
+  $jsonFile = "content.json";
+  $jsonString = @file_get_contents($jsonFile);
+  if ($jsonString === false) {
+      throw new Exception('Unable to read ' . $jsonFile);
+  }
+  
+  $jsonData = json_decode($jsonString, true);
+  if (json_last_error() !== JSON_ERROR_NONE) {
+      throw new Exception('Invalid JSON format in ' . $jsonFile);
+  }
+  $banners = array("1", "2", "3", "4");
+  if(in_array($_GET['setbanner'], $banners)){
+    foreach($jsonData['users'] as &$euser){
+      if($euser['id'] == $id){
+        $euser['banner'] = $_GET['setbanner'];
+      }
+    }
+  }
 
+  $themes = array("white", "black");
+  if(in_array($_GET['theme'], $themes)){
+    foreach($jsonData['users'] as &$euser){
+      if($euser['id'] == $id){
+        $euser['theme'] = $_GET['theme'];
+      }
+    }
+  }
+  $newJson = json_encode($jsonData, JSON_PRETTY_PRINT);
+  if (file_put_contents($jsonFile, $newJson) === false) {
+    throw new Exception('Unable to write to content.json');
+  }
+}
 
 if (isset($_SESSION['user'])){
   require 'views/settings.view.php';

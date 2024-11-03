@@ -66,7 +66,7 @@ require 'connection.php';
                     break;
                 }
             }
-            
+
             $newUser = [
                 "id" => $result['id'],
                 "banner" => 1,

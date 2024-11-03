@@ -156,17 +156,16 @@
 		</div>
 	</div>
 	<script>
-    // Usamos las variables de etiquetas y ganancias generadas por PHP
-    const labels = chartLabels;   // Nombres de los meses
-    const earnings = chartEarnings; // Ganancias por mes, con 0 para meses sin ventas
+    const labels = chartLabels;
+    const earnings = chartEarnings;
 
     console.log("Últimos 6 meses:", labels);
 
     const data = {
-        labels: labels, // Usar las etiquetas desde el backend
+        labels: labels,
         datasets: [{
             label: 'Sales in ($)',
-            data: earnings, // Usar los datos de ganancias desde el backend
+            data: earnings,
             fill: false,
             borderColor: '#4C52F0',
             tension: 0

@@ -156,7 +156,6 @@
 		}
 	</style>
 	<?php require "menutemplate.view.php"; ?>
-
     <div class="contents">
 	<?php if (isset($_SESSION['message'])): ?>
             <div class="alert alert-success" role="alert">
@@ -212,20 +211,6 @@
 			});
 		});
 	});
-	</script>
-	<script>
-		let auth = document.getElementById('authverify');
-		let notification = document.querySelector('.authnotification');
-
-		if (auth.textContent === 'verified') {
-			notification.style.display = "none";
-			auth.style.display = "none";
-			console.log("verified");
-		} else {
-			notification.style.display = "block";
-			console.log("Not verified");
-			auth.style.display = "none";
-		}
 	</script>
 	<script>
 		const xMark = document.querySelector('.x-mark');

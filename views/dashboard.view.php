@@ -129,6 +129,7 @@
 	<?php require "menutemplate.view.php"; ?>
 	<div class="out">
 		<div class="boxses">
+			<p id="authverify"><?php echo $result['status'];?></p>
 			<a class="box authnotification" style="background: linear-gradient(280deg, rgb(124, 89, 207) 20%, rgba(59,58,237,1) 100%); color: white;" href="/verify">
 				<div style="display: flex; flex-wrap: nowrap;">
 					<h2>You must verify the email of your account.</h2>

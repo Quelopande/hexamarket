@@ -122,7 +122,6 @@
 		}
 		.last:active{
 			border: 1px solid var(--standard-txt-color);
-			box-shadow: 0px 0px 40px 1px var(--standard-txt-color);
 		}
 		.out .sql-img input{
 			display: none;
@@ -206,12 +205,13 @@
 		.modal img{
 			object-fit: cover;
 			border-radius: 26px;
-			border: solid BLACK 1px;
+			border: solid black 1px;
 			width: 100%;
 			height: 200px;
 		}
 	</style>
 	<?php require "menutemplate.view.php"; ?>
+	<p id="authverify"><?php echo $result['status'];?></p>
 	<a class="box authnotification" style="background: linear-gradient(280deg, rgb(124, 89, 207) 20%, rgba(59,58,237,1) 100%); color: white;" href="/verify">
 		<div style="display: flex; flex-wrap: nowrap;">
 			<h2 style="margin-left: 10px;">You must verify the email of your account.</h2>
@@ -265,7 +265,6 @@
 					</ul>
 				</div>
 				<?php endif; ?>	
-				</div>
 				<div id="modal" class="modal">
 					<div class="modalContent">
 						<h1>Profile banner selector</h1>
@@ -282,6 +281,27 @@
 				</div>
 			</form>
 		</div>
+		<style>
+			.themes a{
+				background: var(--background-primary-hover);
+				padding: 10px;
+				border-radius: 20px;
+				border: 1px solid var(--background-primary-active);
+			}
+			.themes a:hover{
+				background: var(--background-primary-active);
+				transition: 0.3s all;
+			}
+			.themes a:active{
+				border: 1px solid var(--standard-txt-color);
+			}
+		</style>
+		<div class="sql-change container themes" style="text-align: left;">
+			<h2 style="text-align: center; margin-top:10px !important;">Themes</h2>
+			<a href="/settings?theme=black" style=" display:flex; flex-direction: row; margin-bottom: 20px;"><img src="/assets/media/blacktheme.png" alt="white theme" width="180px" style="border-radius: 16px;"><h2 style="margin-top: 30px !important;">Dark theme</h2></a>
+			<a href="/settings?theme=white" style=" display:flex; flex-direction: row;"><img src="/assets/media/whitetheme.png" alt="white theme" width="180px" style="border-radius: 16px;"><h2 style="margin-top: 30px !important;">Light theme</h2></a>
+		</div>
+	</div>
 	<script>
 		let modal = document.getElementById("modal");
 		let btn = document.getElementById("modalBtn");
