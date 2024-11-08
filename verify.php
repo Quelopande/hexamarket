@@ -15,8 +15,8 @@ require 'connection.php';
     $statement = $connection->prepare('SELECT * FROM users WHERE user = :user LIMIT 1');
     $statement->execute(array(':user' => $user));
     $result = $statement->fetch();
-            $email = $result['email'];
-        $sqlCode = $result['code'];
+    $email = $result['email'];
+    $sqlCode = $result['code'];
 
     if ($result === false || $result['status'] !== 'notverified') {
         header('Location: login.php');
@@ -25,7 +25,7 @@ require 'connection.php';
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $code = trim($_POST['code1'] . $_POST['code2'] . $_POST['code3'] . $_POST['code4'] . $_POST['code5'] . $_POST['code6']);
-        $ucode = '';
+        $ucode= mt_rand(211111,999999);
         $status = 'verified';
         $errors = '';
 
