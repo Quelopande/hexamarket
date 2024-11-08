@@ -3,18 +3,18 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Settings - Account Managment | Hexamarket</title>
+	<title>Settings - Settings Managment | Hexamarket</title>
 	<link href="https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="website icon" type="webp" href="assets/media/logo.webp">
 	<meta property="og:locale" content="en">
 	<meta property="og:site_name" content="©Quelopande"/>
 	<meta property="og:type" content="website"/>
-	<meta property="og:title" content="Hexamarket | Dashboard - Settings">
+	<meta property="og:title" content="Hexamarket | Security">
     <script defer src="https://cdn.overtracking.com/t/t3LztDRiqUxbRS2X6/"></script>
 </head>
 <body class="body">
-<style>
+	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 		body{
 			overflow-x: hidden;
@@ -77,7 +77,7 @@
 		.out .container h2{
 			margin-top: 15px !important;
 		}
-		.out .container h2,input,button,p{
+		.out .container h2,input,button,p,label{
 			margin-left: 10px;
 			margin-right: 10px;
 			margin-top: 10px;
@@ -170,21 +170,23 @@
 			display: none;
 			position: fixed;
 			z-index: 100;
+			padding-top: 100px;
+			font-weight: 300;
 			left: 0;
 			top: 0;
-			padding-top: 20px;
 			width: 100%;
 			height: 100%;
 			background-color: rgb(0,0,0);
 			background-color: rgba(0,0,0,0.4);
-			overflow-y: auto;
 		}
 		.modalContent {
-			background-color: #fefefe;
+			background-color: var(--background-primary);
+			color: var(--standard-txt-color);
 			margin: auto;
 			padding: 20px;
 			width: 80%;
-			border-radius: 16px;
+			border-radius: 26px;
+			text-align: left;
 		}
 		.modalContent .close{
 			background-color: red;
@@ -202,12 +204,8 @@
 		.modalContent .submit:hover{
 			background-color: #00b712;
 		}
-		.modal img{
-			object-fit: cover;
-			border-radius: 26px;
-			border: solid black 1px;
-			width: 100%;
-			height: 200px;
+		.modalButtons{
+			text-align: right;
 		}
 	</style>
 	<?php require "menutemplate.view.php"; ?>
@@ -219,89 +217,35 @@
 		</div>
 	</a>
 	<div class="out">
-		<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" name="changeProfileImgSubmit" novalidate="" enctype="multipart/form-data">
-    		<div class="sql-img container">
-				<h2>Set up your new profile picture here!</h2>
-				<label class="file-upload" for="upload"><i class="fa-solid fa-upload"></i> <br>Drag or Drop your new profile picture here <br> <h6>Only image files</h6></label>
-				<input class="upload" id="upload" type="file" name="image" accept=".apng,.avif,.gif,.jpg,.jpeg,.jfif,.pjpeg,.pjp,.png,.svg,.webp" required onchange="check()">
-				<p class="uploaded"></p>
-				<button class="last" type="submit" name="changeProfileImgSubmit">Save the picture</button>
-				<?php if(!empty($profileImgNotifications)): ?>
-				<div>
-					<ul>
-						<?php echo $profileImgNotifications; ?>
-					</ul>
-				</div>
-				<?php endif; ?>	
-			</div>
-		</form>
 		<div class="sql-change container">
-			<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" name="changeusername" novalidate="">
-				<h2>Change username</h2>
-				<input type="email" name="oldUser" placeholder="Old username" required>
-				<input type="email" name="newUser" placeholder="New username" required>
-				<p><b>Warning:</b> By changing the username this session will expire.</p>
-				<button class="last" type="submit" name="changeUsernameSubmit">Change username</button>
-				<?php if(!empty($userErrors)): ?>
+			<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" name="changepassword" novalidate="">
+				<h2>Change password</h2>
+				<input type="password" name="oldPassword" placeholder="Old password" required>
+				<input type="password" name="newPassword" placeholder="New password" required>
+                <input type="password" name="newPasswordV" placeholder="New password 2" required>
+				<p><b>Warning:</b> If you change the password this session will expire.</p>
+				<a id="modalBtn" class="last" href="/mails/password.security.php" target="_blank" style="display: block;">Change password</a>
+				<?php if(!empty($passErrors)): ?>
 				<div>
 					<ul>
-						<?php echo $userErrors; ?>
-					</ul>
-				</div>
-				<?php endif; ?>	
-			</form>
-		</div>
-		<div class="sql-change container">
-			<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" name="changeusername" novalidate="">
-				<h2>Change Email</h2>
-				<input type="email" name="oldEmail" placeholder="Old email" required>
-				<input type="email" name="newEmail" placeholder="New email" required>
-				<p><b>Warning:</b> If you change the email you will need to verify your account again. This session will expire.</p>
-				<p id="modalBtn" class="last" onclick="return false;">Change Email</p>
-				<?php if(!empty($emailErrors)): ?>
-				<div>
-					<ul>
-						<?php echo $emailErrors; ?>
+						<?php echo $passErrors; ?>
 					</ul>
 				</div>
 				<?php endif; ?>	
 				<div id="modal" class="modal">
 					<div class="modalContent">
-						<h1>Profile banner selector</h1>
-						<img src="/menzatyx/assets/media/banner1.webp" alt="Banner 1, GTA city">
-						<img src="/menzatyx/assets/media/banner2.webp" alt="Banner 2, Minecraft nature">
-						<img src="/menzatyx/assets/media/banner3.webp" alt="Banner 3, Minecraft nature">
-						<img src="/menzatyx/assets/media/banner4.webp" alt="Banner 4, GTA city">
-						<a class="close last">Back</a>
-						<button class="last submit" type="submit" name="changeBannerSubmit">Set new banner</button>
-						<!-- <p>Are you sure that you want to change the email. If you put a wrong new email you will loose you account.</p>
-						<a class="close last">Back</a>
-						<button class="last submit" type="submit" onclick="login.submit()" name="changeEmailSubmit">Change email</button> -->
+						<p>Are you sure that you want to change the password. If you put a wrong new password you will loose you account.</p>
+						<label for="passCode" style="font-weight: 700;">We have sent you an email with a code.</label>
+						<input type="text" name="passCode" id="passCode" style="width: 130px;" placeholder="Verification code">
+						<br>
+						<div class="modalButtons">
+							<a class="close last">Back</a>
+							<button class="last submit" type="submit" onclick="login.submit()" name="changepassword" style="width: 190px; left: 0;">Change password</button>
+						</div>
 					</div>
 				</div>
 			</form>
 		</div>
-		<style>
-			.themes a{
-				background: var(--background-primary-hover);
-				padding: 10px;
-				border-radius: 20px;
-				border: 1px solid var(--background-primary-active);
-			}
-			.themes a:hover{
-				background: var(--background-primary-active);
-				transition: 0.3s all;
-			}
-			.themes a:active{
-				border: 1px solid var(--standard-txt-color);
-			}
-		</style>
-		<div class="sql-change container themes" style="text-align: left;">
-			<h2 style="text-align: center; margin-top:10px !important;">Themes</h2>
-			<a href="/settings?theme=black" style=" display:flex; flex-direction: row; margin-bottom: 20px;"><img src="/assets/media/blacktheme.png" alt="white theme" width="180px" style="border-radius: 16px;"><h2 style="margin-top: 30px !important;">Dark theme</h2></a>
-			<a href="/settings?theme=white" style=" display:flex; flex-direction: row;"><img src="/assets/media/whitetheme.png" alt="white theme" width="180px" style="border-radius: 16px;"><h2 style="margin-top: 30px !important;">Light theme</h2></a>
-		</div>
-	</div>
 	<script>
 		let modal = document.getElementById("modal");
 		let btn = document.getElementById("modalBtn");
@@ -364,22 +308,6 @@
 				main.style.left = "30px";
 				body.style.overflowY = "scroll";
 			});
-		}
-	</script>
-	<script>
-		function check() {
-			const fileInput = document.getElementById('upload');
-			const filePath = fileInput.value;
-			const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.webp)$/i;
-
-			if (!allowedExtensions.exec(filePath)) {
-				alert('Invalid file type');
-				fileInput.value = '';
-				return false;
-			} else {
-				const fileName = filePath.split('\\').pop();
-				document.querySelector('.uploaded').innerText = `Selected file: ${fileName}`;
-			}
 		}
 	</script>
 </body>

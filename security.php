@@ -11,12 +11,15 @@ $result = $statement->fetch();
 $id = $result['id'];
 $pass = $result['pass'];
 $email = $result['email'];
+$code = $result['code'];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (isset($_POST['changepassword'])) {
     $oldPassword = strtolower($_POST['oldPassword']);
     $newPassword = strtolower($_POST['newPassword']);
     $newPasswordV = strtolower($_POST['newPasswordV']);
+    $passwordCode =  htmlspecialchars(strtolower(trim($_POST['passCode'])), ENT_QUOTES, 'UTF-8');
+    $newCode=mt_rand(211111,999999);
 
     require 'secure_pepper.php';
     $oldPassPepper = $oldPassword . $pepper . $result['salt'];
@@ -35,16 +38,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           $passErrors .= 'The new password and the old password can´t be same.';
         } else{
           if($newPassword !== $newPasswordV){
-            $passErrors .= 'The "New password gap" and the "New password 2" gap must have the same password.';
+            $passErrors .= 'The "New password" gap and the "New password 2" gap must have the same password.';
           } else{
-            if (in_array(strtolower($newPassword), $weakPasswords) || (strlen($newPassword) < 8)){
-              $passErrors .= 'The password is too weak. The password must have more than 8 characters.';
+            if(empty($passwordCode)){
+              $passErrors .= 'To change the password you must fill the verification code gap with a code that has been sent to your email.';
+            } elseif($passwordCode !== $code){
+              $passErrors .= 'The verification code is incorrect.';
+            }
+            elseif(in_array(strtolower($newPassword), $weakPasswords) || (strlen($newPassword) < 2)){
+            $passErrors .= 'The password is too weak. The password must have more than 8 characters. And the password must be secure';
             } else {
               header('Location: close.php'); 
-              $statement = $connection->prepare('UPDATE users SET pass = :pass WHERE id = :id');
+              $statement = $connection->prepare('UPDATE users SET pass = :pass, code = :code WHERE id = :id');
               $statement->execute(array(
                 ':id' => $id,
                 ':pass' => $hash,
+                ':code' => $newCode,
               ));
             require 'config.php';
             require 'vendor/autoload.php';
