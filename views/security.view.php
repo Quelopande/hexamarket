@@ -236,7 +236,7 @@
 					<div class="modalContent">
 						<p>Are you sure that you want to change the password. If you put a wrong new password you will loose you account.</p>
 						<label for="passCode" style="font-weight: 700;">We have sent you an email with a code.</label>
-						<input type="text" name="passCode" id="passCode" style="width: 130px;" placeholder="Verification code">
+						<input type="text" name="passCode" id="passCode" style="width: 153px;" placeholder="Verification code">
 						<br>
 						<div class="modalButtons">
 							<a class="close last">Back</a>

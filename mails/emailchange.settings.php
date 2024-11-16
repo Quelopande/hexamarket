@@ -1,5 +1,5 @@
 <?php session_start();
-$user = $_SESSION['user'];
+    $user = $_SESSION['user'];
 
         require '../config.php';
         require '../vendor/autoload.php';
@@ -13,17 +13,17 @@ $user = $_SESSION['user'];
         $email = $result['email'];
         $code = $result['code'];
 
-        $title = 'Code to change password';
+        $title = 'Code to change email';
         $message = "
         <html>
         <head></head>
         <body style='background-color: rgb(255, 255, 255); margin: 0; padding: 0;'>
             <div style='max-width: 600px; margin: 50px auto; padding: 30px; border: solid 3px #c5c5c5; border-radius: 20px; background-color: #ffffff;'>
-                <h1 style='font-weight: 900; text-align: center;'>Change password code!</h1>
-                <p style='margin-bottom: 20px; text-align: center;'>Hello <b>$user</b>! The last step to change your Hexamarket account password. With your new password you will be more secure.</p>
+                <h1 style='font-weight: 900; text-align: center;'>Change email code!</h1>
+                <p style='margin-bottom: 20px; text-align: center;'>Hello <b>$user</b>! The last step to change your Hexamarket account's email. With your new email you will be should be more secure and you can login with your new email</p>
                 <p style='text-align: center;'>Use this code to complete your account:</p>
                 <h2 style='font-size: 34px; text-align: center;'>$code</h2>
-                <p class='sub' style='color: rgb(108, 108, 108); text-align: center;'>You need to put this code in the <a href='https://hexamarket.store/security' style='color: #0062ff; font-weight: 700; text-decoration: none '>Security page, change password section</a>.</p>
+                <p class='sub' style='color: rgb(108, 108, 108); text-align: center;'>You need to put this code in the <a href='https://hexamarket.store/settings' style='color: #0062ff; font-weight: 700; text-decoration: none '>Settings page, change email section</a></p>
                 <footer style='display: flex; flex-direction: column; margin-top: 20px;'>
                     <p class='sub' style='color: rgb(108, 108, 108); text-align: center; margin: 0 auto;'>This mail was sent by Hexamarket for $user ($email)</p>
                     <div class='Hexamarket quelopande' style='display: flex; justify-content: center; align-items: center; margin-top: -20px;'>

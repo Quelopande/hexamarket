@@ -15,7 +15,7 @@ $id = $result['id'];
 $email = $result['email'];
 require 'config.php';
 require 'vendor/autoload.php';
-// $mail = new PHPMailer\PHPMailer\PHPMailer();
+$mail = new PHPMailer\PHPMailer\PHPMailer();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (isset($_POST["changeProfileImgSubmit"])) {
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if($oldUser == $newUser) {
           $userErrors .= 'The new username and the old username are the same.';
         } else{
-          if($eresult == false){
+          if($eresult !== false){
             $userErrors .= 'This username is being used by someone else.';
           } else{
             rename("u/$user.php", "u/$newUser.php");
@@ -112,83 +112,62 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   }
   if (isset($_POST['changeEmailSubmit'])) {
-    $email = $result['email'];
-    $oldEmail = filter_var(strtolower($_POST['oldEmail']), FILTER_SANITIZE_EMAIL);
-    $newEmail = filter_var(strtolower($_POST['newEmail']), FILTER_SANITIZE_EMAIL);
-    $status = 'notverified';
-    $code=mt_rand(211111,999999);
+      $email = $result['email'];
+      $oldEmail = filter_var(strtolower($_POST['oldEmail']), FILTER_SANITIZE_EMAIL);
+      $newEmail = filter_var(strtolower($_POST['newEmail']), FILTER_SANITIZE_EMAIL);
+      $mailCode = htmlspecialchars(strtolower(trim($_POST['mailCode'])), ENT_QUOTES, 'UTF-8');
+      $status = 'notverified';
+      $code = $result['code'];
+      $newCode = mt_rand(211111, 999999);
 
-    $statement = $connection->prepare('SELECT * FROM users WHERE email = :email LIMIT 1');
-    $statement->execute(array(':email' => $newEmail));
-    $iresult = $statement->fetch();
+      $statement = $connection->prepare('SELECT * FROM users WHERE email = :email LIMIT 1');
+      $statement->execute(array(':email' => $newEmail));
+      $iresult = $statement->fetch();
 
-    if(empty($newEmail) || empty($oldEmail)){
-      $emailErrors .= 'Fill all the gaps';
-    } else{
-      if(!filter_var($newEmail, FILTER_VALIDATE_EMAIL) OR !filter_var($oldEmail, FILTER_VALIDATE_EMAIL)){
-        $emailErrors .= 'Invalid email adress.';
-      } else{
-        if(($oldEmail == $email) == false){
-          $emailErrors .= 'You must fill the "Old user" gap with your actual email.';
-        } else{
-          if($oldEmail == $newEmail) {
-            $emailErrors .= 'The new email and the old email can´t be same.';
-          } else{
-            if($iresult == false){
-              $emailErrors .= 'This email is being used by someone else.';
-            } else{
-              header('Location: close.php'); 
-              $statement = $connection->prepare('UPDATE users SET email = :email, status = :status, code = :code WHERE id = :id');
-              $statement->execute(array(
-                  ':id' => $id,
-                  ':code' => $code,
-                  ':status' => $status,
-                  ':email' => $newEmail,
-              ));
-              $etitle = 'Email has been changed';
+      if (empty($newEmail) || empty($oldEmail)) {
+          $emailErrors .= 'Fill all the gaps.';
+      } elseif (!filter_var($newEmail, FILTER_VALIDATE_EMAIL) || !filter_var($oldEmail, FILTER_VALIDATE_EMAIL)) {
+          $emailErrors .= 'Invalid email address.';
+      } elseif ($oldEmail !== $email) {
+          $emailErrors .= 'You must enter your current email in the "Old email" field.';
+      } elseif ($oldEmail === $newEmail) {
+          $emailErrors .= 'The new email and the old email cannot be the same.';
+      } elseif ($iresult !== false) {
+          $emailErrors .= 'This email is already being used by someone else.';
+      } elseif (empty($mailCode) || $mailCode !== $code) {
+          $emailErrors .= 'Invalid or missing verification code.';
+      } else {
+          $statement = $connection->prepare('UPDATE users SET email = :email, status = :status, code = :code WHERE id = :id');
+          $statement->execute(array(
+              ':id' => $id,
+              ':code' => $newCode,
+              ':status' => $status,
+              ':email' => $newEmail,
+          ));
+          try {
+              $mail->isSMTP();
+              $mail->Host = CONTACTFORM_SMTP_HOSTNAME;
+              $mail->SMTPAuth = true;
+              $mail->Username = CONTACTFORM_SMTP_USERNAME;
+              $mail->Password = CONTACTFORM_SMTP_PASSWORD;
+              $mail->SMTPSecure = CONTACTFORM_SMTP_ENCRYPTION;
+              $mail->Port = CONTACTFORM_SMTP_PORT;
 
-              $emessage = "
-              <html>
-                  <body style='background-color: rgb(242, 242, 242); margin: 0 auto;padding: 30px;margin-top: 100px; width: 500px;height: 350px;border: solid 3px #989898;border-radius: 20px;'>
-                      <h1 style='font-weight: 900;'>Your account email has been changed</h1>
-                      <p style='margin-bottom: 20px;'>Hi dear<b> $user !</b> <br> </p>
-                      <p>You recently have changed your Hexamarket account username from <b>$email</b> to <b>$newEmail</b>. If it wasn't you, you can change again your email, in the settings page. Therefore you must verify your email in <a href='https://hexamarket.store/verify'  style='color: #0062ff;font-weight: 700;text-decoration: none;'>verify page</a> by entering the code we´ve sent you to your new email.<p>
-                      <footer style='display: flex;flex-direction: column; align-items: center;'>
-                          <p class='sub' style='color: rgb(108, 108, 108);text-align: center;'>This mail was sent by Hexamarket for $user ($email)</p>
-                          <div class='Hexamarket'>
-                              <p style='font-weight: 900;font-size: 25px;margin-left: 10px;'>Hexamarket</p>
-                          </div>
-                      </footer>
-                  </body>
-              </html>
-              ";
-            try {
-                $mail->isSMTP();
-                $mail->Host       = CONTACTFORM_SMTP_HOSTNAME;
-                $mail->SMTPAuth   = true;
-                $mail->Username   = CONTACTFORM_SMTP_USERNAME;
-                $mail->Password   = CONTACTFORM_SMTP_PASSWORD;
-                $mail->SMTPSecure = CONTACTFORM_SMTP_ENCRYPTION;
-                $mail->Port       = CONTACTFORM_SMTP_PORT;
+              $mail->setFrom(CONTACTFORM_FROM_ADDRESS, CONTACTFORM_FROM_NAME);
+              $mail->addAddress($newEmail);
 
-                $mail->setFrom(CONTACTFORM_FROM_ADDRESS, CONTACTFORM_FROM_NAME);
-                $mail->addAddress($email);
+              $mail->isHTML(true);
+              $mail->Subject = 'Email has been changed';
+              $mail->Body = $emessage;
+              $mail->AltBody = strip_tags($emessage);
 
-                $mail->isHTML(true);
-                $mail->Subject = $etitle;
-                $mail->Body    = $emessage;
-                $mail->AltBody = strip_tags($emessage);
-
-                $mail->send();
-            } catch (Exception $e) {
-                error_log('Error: ' . $e->getMessage());
-                echo 'An error occurred. Please try again later.';
-            }
-            }
+              $mail->send();
+          } catch (Exception $e) {
+              $emailErrors .= 'An error occurred while sending the email. Please try again.';
           }
-        } 
+
+          header('Location: close.php');
       }
-    }
   }
 }
 
