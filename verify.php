@@ -25,7 +25,7 @@ require 'connection.php';
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $code = trim($_POST['code1'] . $_POST['code2'] . $_POST['code3'] . $_POST['code4'] . $_POST['code5'] . $_POST['code6']);
-        $ucode= mt_rand(211111,999999);
+        $ucode= random_int(211111,999999);
         $status = 'verified';
         $errors = '';
 

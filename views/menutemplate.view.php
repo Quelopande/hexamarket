@@ -90,7 +90,7 @@
 			-moz-user-select: none;
 			-ms-user-select:none;
 			user-select:none;
-			z-index: 90;
+			z-index: 99;
 		}
 		.sidebar .username{
 			display: flex;
@@ -177,6 +177,9 @@
 			transition: all 0.1s;
 			font-weight: 300;
 			border-radius: 10px;
+		}
+		input:focus{
+			outline: none !important;
 		}
 		#authverify{
 			visibility: hidden

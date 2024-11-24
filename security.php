@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $newPassword = strtolower($_POST['newPassword']);
     $newPasswordV = strtolower($_POST['newPasswordV']);
     $passwordCode =  htmlspecialchars(strtolower(trim($_POST['passCode'])), ENT_QUOTES, 'UTF-8');
-    $newCode=mt_rand(211111,999999);
+    $newCode= random_int(211111,999999);
 
     require 'secure_pepper.php';
     $oldPassPepper = $oldPassword . $pepper . $result['salt'];

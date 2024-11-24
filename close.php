@@ -28,23 +28,6 @@ function deleteCookie($name) {
     setcookie($name, '', time() - 3600, '/', '', true, true);
 }
 
-function encryptCookie($data) {
-    global $cookieEncryptKey;
-    $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length('aes-256-gcm'));
-    $ciphertext = openssl_encrypt($data, 'aes-256-gcm', $cookieEncryptKey, 0, $iv, $tag);
-    return base64_encode($iv . $tag . $ciphertext);
-}
-
-function decryptCookie($data) {
-    global $cookieEncryptKey;
-    $data = base64_decode($data);
-    $iv_length = openssl_cipher_iv_length('aes-256-gcm');
-    $iv = substr($data, 0, $iv_length);
-    $tag = substr($data, $iv_length, 16);
-    $ciphertext = substr($data, $iv_length + 16);
-    return openssl_decrypt($ciphertext, 'aes-256-gcm', $cookieEncryptKey, 0, $iv, $tag);
-}
-
 if (isset($_SESSION['discord_token'])) {
     $discordToken = $_SESSION['discord_token'];
     revokeDiscordToken($discordToken);

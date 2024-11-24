@@ -91,15 +91,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $date = new DateTime('now', new DateTimeZone('GMT'));
     $formattedDate = $date->format('Y-m-d H:i:s');
 
-    if (isset($_POST['price'])){
-        $price = $_POST['price'];
-
-        if (is_numeric($price) && $price >= 1 && $price <= 1000) {
+    if (isset($_POST['price'])) {
+        $price = sanitize_input($_POST['price']);
+    
+        if ($_POST['price'] === '') {
+            $formattedPrice = null;
+        } elseif (is_numeric($price) && $price >= 1 && $price <= 1000) {
             $formattedPrice = number_format((float)$price, 2, '.', '');
         } else {
             $errors .= "Please, introduce a valid price between 1 and 1000 USD.";
         }
-    }
+    }    
 
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $targetDir = "assets/media/u/posts/";

@@ -89,7 +89,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $encryptedCookieValue = encryptCookie($user);
                     setcookie('user', $encryptedCookieValue, time() + 15 * 24 * 60 * 60, '/', '', true, true); // 15 days cookie
                     $_SESSION['user'] = $user;
-                    header("Location: /");
+                    $redirectURL = isset($_POST['redirect']) ? $_POST['redirect'] : (isset($_GET['r']) ? $_GET['r'] : '/saas');
+                    header("Location: $redirectURL");
                     exit;
                 } else {
                     $errors .= '<div class="alert alert-danger d-flex align-items-center" role="alert">Incorrect code. Try again.</div>';
@@ -97,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         } else {
             $encryptedCookieValue = encryptCookie($user);
-            setcookie('user', $encryptedCookieValue, time() + 15 * 24 * 60 * 60, '/', '', true, true); // 15 days cookie
+            setcookie('user', $encryptedCookieValue, time() + 15 * 24 * 60 * 60, '/', '', true, true, 'Strict'); // 15 days cookie
             $_SESSION['user'] = $user;
             header("Location: /");
             exit;

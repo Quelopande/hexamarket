@@ -2,12 +2,12 @@
 session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $user = htmlspecialchars(strtolower(trim($_POST['user'])), ENT_QUOTES, 'UTF-8');
-  $password = strtolower($_POST['password']);
+  $password = trim($_POST['password']);
   $email = filter_var(strtolower($_POST['email']), FILTER_SANITIZE_EMAIL);
   $password2 = trim($_POST['password2']);
   $rank = 'user';
   $status = 'notverified';
-  $code=mt_rand(211111,999999);
+  $code=random_int(211111,999999);
 
   $errors = '';
 
@@ -88,6 +88,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $encryptedCookieValue = encryptCookie($user);
 
   setcookie('user', $encryptedCookieValue, time() + 15 * 24 * 60 * 60, '/', '', true, true);
+  $_SESSION['user'] = $user;
+
   header('Location: auth');
     exit;
   }

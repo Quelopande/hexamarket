@@ -32,7 +32,6 @@ foreach ($articles as $article) {
     $tags = isset($article['tags']) ? $article['tags'] : [];
     $sections = isset($article['sections']) ? $article['sections'] : [];
     $html .= '<div class="content">';
-    $html .= '<span> Date: ' . $formattedDate . '</span>';
     $html .= '<form id="deleteForm' . $article['articleId'] . '" action="manage.php" method="POST">';
     $html .= '<input type="hidden" name="action" value="delete">';
     $html .= '<input type="hidden" name="articleId" value="' . $article['articleId'] . '">';
@@ -56,18 +55,19 @@ foreach ($articles as $article) {
     <div class="modal fade" id="editModal' . $articleId . '" tabindex="-1" role="dialog" aria-labelledby="editModalLabel' . $articleId . '" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="editModalLabel' . $articleId . '">' . htmlspecialchars($articleName) . '</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
           <form id="editForm' . $articleId . '">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+              <p>'. htmlspecialchars($articleName) .'</p>
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
             <div class="modal-body">
-              <p>Date: ' . $formattedDate . '</p>
-              <label for="tags">Tags:</label>
-              <input type="text" id="tags' . $articleId . '" name="tags" value="' . implode(', ', array_map('htmlspecialchars', $tags)) . '">';
-    
+              <p class="date">Date: ' . $formattedDate . '</p>
+              <div class="container">
+                <label for="tags">Tags:</label>
+                <input type="text" id="tags' . $articleId . '" name="tags" value="' . implode(', ', array_map('htmlspecialchars', $tags)) . '">
+              </div>
+              <div class="container sections">';
     foreach ($sections as $index => $section) {
         $sectionTitle = isset($section['title']) ? $section['title'] : 'Sin título';
         $sectionDescription = isset($section['description']) ? $section['description'] : 'Sin descripción';
@@ -82,15 +82,36 @@ foreach ($articles as $article) {
     }
     
     $html .= '
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button>
-            </div>
-          </form>
+    </div>
+    <div class="upload">
+        <div class="buttons">
+            <p id="priceNull">Free and public resource</p>
+            <p id="priceSet">Add payment</p>
         </div>
-      </div>
-    </div>';    
+        <div class="activated">';
+
+if (empty($result['PayPalEmail'])) {
+    $html .= "<div style='margin-left: 20px; margin-right: 20px; font-weight:400'>You must Link a PayPal account to post a resource with a price and to receive your respective income.</div>";
+} else {
+    $html .= "
+        <div class='priceNull'>
+            Your resource will be free for everyone and the people could download your resource without login in.
+        </div>
+        <div class='priceSet' style='display: none;'>
+            <label for='price'>Price ($ - USD):</label>
+            <input type='number' id='price' name='price' min='1' max='1000' step='0.01' placeholder='0.00'>
+        </div>";
+}
+
+$html .= '
+        </div>
+    </div>
+  </div>
+</form>
+</div>
+</div>
+</div>';
+
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete') {
   $articleIdToDelete = $_POST['articleId'];

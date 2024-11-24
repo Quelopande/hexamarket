@@ -15,7 +15,7 @@ $id = $result['id'];
 $email = $result['email'];
 require 'config.php';
 require 'vendor/autoload.php';
-$mail = new PHPMailer\PHPMailer\PHPMailer();
+// $mail = new PHPMailer\PHPMailer\PHPMailer();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (isset($_POST["changeProfileImgSubmit"])) {
@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $mailCode = htmlspecialchars(strtolower(trim($_POST['mailCode'])), ENT_QUOTES, 'UTF-8');
       $status = 'notverified';
       $code = $result['code'];
-      $newCode = mt_rand(211111, 999999);
+      $newCode = random_int(211111, 999999);
 
       $statement = $connection->prepare('SELECT * FROM users WHERE email = :email LIMIT 1');
       $statement->execute(array(':email' => $newEmail));
