@@ -2,9 +2,11 @@
 	$id = $result['id'];
 	$jsonString = file_get_contents('content.json');
 	$data = json_decode($jsonString, true);
+	$userFound = false;
 	foreach ($data['users'] as $jsonUser) {
 		if ($jsonUser['id'] == $id) {
 			$theme = $jsonUser['theme'];
+			$userFound = true;
 		}
 	}
 
@@ -17,36 +19,36 @@
 ?>
 <style>
 		@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-		<?php if ($theme === 'white'): ?>
-        :root {
-            --background-page: #f9f9f9;
-            --background-primary: #d4d4d46b;
-            --background-primary-hover: #e1e1e2;
-            --background-primary-active: #d2d2d2;
-            --background-secundary: #ededed;
-            --background-tertiary: rgb(220, 220, 220);
-            --border-primary: rgb(101, 101, 101);
-            --standard-border-radius: 16px;
-            --standard-txt-color: black;
-            --standard-txt-color-opposite: white;
-            --secondary-txt-color: rgb(59, 59, 59);
-            --standard-txt-font-weight: 400;
-        }
+		<?php if (!$userFound || $theme === 'white'): ?>
+		:root {
+			--background-page: #f9f9f9;
+			--background-primary: #eaeaea;
+			--background-primary-hover: #e1e1e2;
+			--background-primary-active: #d2d2d2;
+			--background-secundary: #ededed;
+			--background-tertiary: rgb(220, 220, 220);
+			--border-primary: rgb(101, 101, 101);
+			--standard-border-radius: 16px;
+			--standard-txt-color: black;
+			--standard-txt-color-opposite: white;
+			--secondary-txt-color: rgb(59, 59, 59);
+			--standard-txt-font-weight: 400;
+		}
 		<?php else: ?>
-			:root {
-				--background-page: #131314;
-				--background-primary: #1e1f20;
-				--background-primary-hover: #2a2a2a;
-				--background-primary-active: #3d3d3d;
-				--background-secundary: #1c1c1c;
-				--background-tertiary: rgb(43, 43, 43);
-				--border-primary: rgb(101, 101, 101);
-				--standard-border-radius: 16px;
-				--standard-txt-color: white;
-				--standard-txt-color-opposite: rgb(12, 12, 12);
-				--secondary-txt-color: rgb(237, 237, 237);
-				--standard-txt-font-weight: 300;
-			}
+		:root {
+			--background-page: #131314;
+			--background-primary: #1e1f20;
+			--background-primary-hover: #2a2a2a;
+			--background-primary-active: #3d3d3d;
+			--background-secundary: #1c1c1c;
+			--background-tertiary: rgb(43, 43, 43);
+			--border-primary: rgb(101, 101, 101);
+			--standard-border-radius: 16px;
+			--standard-txt-color: white;
+			--standard-txt-color-opposite: black;
+			--secondary-txt-color: rgb(237, 237, 237);
+			--standard-txt-font-weight: 300;
+		}
 		<?php endif; ?>
 		body{
 			overflow-x: hidden;
