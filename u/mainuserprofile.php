@@ -152,21 +152,6 @@
                 </div>
             </section>
             <?php require "../reportUser.php";?>
-            <!-- <section onclick="window.location.href=''">
-                <p>«★»┈┈┈(☠️ ¿Qué ofrecemos? ☠️)┈┈┈«★»</p><br>
-                <p>👑⟩ Owner's activos</p>
-                <p>🤖⟩ 10 Bots bien configurados y 3 bots nuestros que funcionan perfectos</p>
-                <p>🚗 ⟩ Archivos para FiveM</p>
-                <p>✉️ ⟩Sistemas de ticket con donaciones, ayuda, bugs y un apartado para aportar</p>
-                <p>🤝 ⟩Hacemos alianzas con otros servidores.</p>
-                <p>👑⟩ Ofrecemos scripts y mapeados via ticket</p>
-                <p>🧑🏻‍🎄 ⟩Sorteos habituales</p>
-                <p>⭐ ⟩Recompensa por boost</p>
-                <p>💡 ⟩ Canal para sugerencias y encuestas</p>
-                <p>👕 ⟩ Ropa personalizada para FiveM (abrir ticket)</p>
-                <p>☠️ ⟩Un antiraid muy bien configurado</p> 
-                <p><i class="fa-brands fa-discord"></i><b> Click para unirte</b></p>
-            </section> -->
             <section>
                 <?php echo $html;?>
             </section>

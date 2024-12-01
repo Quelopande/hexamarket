@@ -1,0 +1,19 @@
+{
+    "articles": [
+        {
+            "articleId": 2,
+            "comments": [
+                {
+                    "userId": 1,
+                    "commentId": "c-34234",
+                    "commentTxt": ""
+                },
+                {
+                    "userId": 1,
+                    "commentId": "c-34234",
+                    "commentTxt": ""
+                }
+            ]
+        }
+    ]
+}
