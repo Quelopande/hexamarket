@@ -5,16 +5,16 @@ $profileImgNotifications = '';
 $userErrors = '';
 $emailErrors = '';
 
-require 'connection.php';
-require "vendor/dbMail.php";
+require '../connection.php';
+require "../vendor/dbMail.php";
 
 $statement = $connection->prepare('SELECT * FROM users WHERE user = :user LIMIT 1');
 $statement->execute(array(':user' => $user));
 $result = $statement->fetch();
 $id = $result['id'];
 $email = $result['email'];
-require 'config.php';
-require 'vendor/autoload.php';
+require '../config.php';
+require '../vendor/autoload.php';
 // $mail = new PHPMailer\PHPMailer\PHPMailer();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -206,9 +206,9 @@ if($_GET['setbanner'] || $_GET['theme']){
 }
 
 if (isset($_SESSION['user'])){
-  require 'views/settings.view.php';
+  require '../views/settings.view.php';
 } else if (!isset($_SESSION['user'])){
-  header('Location: login.php');
+  header('Location: ../login.php');
 } else {
-header('Location: ban.php');
+header('Location: ../ban.php');
 }

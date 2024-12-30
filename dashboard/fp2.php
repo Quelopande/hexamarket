@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (empty($code) || empty($password) || empty($email) || empty($password2)) {
     $errors .= '<div class="alert alert-danger d-flex align-items-center" role="alert"><svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg><div>Fill all the gaps.</div></div>';
   } else {
-    require 'connection.php';
+    require '../connection.php';
 
     $statement = $connection->prepare('SELECT * FROM users WHERE email = :email LIMIT 1');
     $statement->execute(array(':email' => $email));
@@ -51,8 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       ':resetcode' => $zero,
     ));
 
-    require 'config.php';
-    require 'vendor/autoload.php';
+    require '../config.php';
+    require '../vendor/autoload.php';
 
     $title = 'Your password has been changed';
   
@@ -96,9 +96,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo 'An error occurred. Please try again later.';
     }
 
-    header('Location: login.php');
+    header('Location: ../login.php');
     exit;
   }
 }
 
-require 'views/fp2.view.php';
+require '../views/fp2.view.php';

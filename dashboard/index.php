@@ -5,7 +5,7 @@ $user = $_SESSION['user'];
 
 $errors = '';
 
-require 'connection.php';
+require '../connection.php';
 
 $statement = $connection->prepare('SELECT * FROM users WHERE user = :user LIMIT 1');
 $statement->execute(array(':user' => $user));
@@ -13,9 +13,9 @@ $result = $statement->fetch();
 
 
 if (isset($_SESSION['user'])){
-  require 'views/dashboard.view.php';
+  require '../views/dashboard.view.php';
 } else if (!isset($_SESSION['user'])){
-  header('Location: login.php');
+  header('Location: ../login.php');
 } else {
-header('Location: ban.php');
+header('Location: ../ban.php');
 }

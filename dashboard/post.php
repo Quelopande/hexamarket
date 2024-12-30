@@ -1,9 +1,8 @@
-<?php
-session_start();
+<?php session_start();
 $errors = '';
 $sectionCount = 0;
 $user = $_SESSION['user'];
-require 'connection.php';
+require '../connection.php';
 
 $statement = $connection->prepare('SELECT * FROM users WHERE user = :user LIMIT 1');
 $statement->execute(array(':user' => $user));
@@ -52,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errors .= "You must fill all the gaps.";
     }
 
-    $jsonString = file_get_contents('content.json');
+    $jsonString = file_get_contents('../content.json');
     $jsonData = json_decode($jsonString, true);
 
     $maxArticleId = 0;
@@ -170,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             array_push($jsonData['users'][$userIndex]['articles'], $newArticle);
 
             $updatedData = json_encode($jsonData, JSON_PRETTY_PRINT);
-            file_put_contents('content.json', $updatedData);
+            file_put_contents('../content.json', $updatedData);
 
             $fileName = "things/$category/$articleName+$newArticleId.php";
             $htmlContent = <<<HTML
@@ -207,12 +206,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $savedFormData = $_SESSION['formData'] ?? [];
 
 if ($result['status'] == 'verified') {
-    require 'views/post.view.php';
+    require '../views/post.view.php';
 } elseif ($result['status'] == 'notverified') {
-    require 'views/nv.view.php';
+    require '../views/nv.view.php';
 } elseif (!isset($_SESSION['user'])) {
-    header('Location: login');
+    header('Location: ../login');
 } else {
-    require 'ban.php';
+    require '../ban.php';
 }
 ?> 

@@ -5,7 +5,7 @@ $h1 = '';  // Inicialización por si no se define en el código
 $orders = [];  // Definir como array vacío
 
 
-require 'connection.php';
+require '../connection.php';
 
 $statement = $connection->prepare('SELECT * FROM users WHERE user = :user LIMIT 1');
 $statement->execute(array(':user' => $user));
@@ -72,7 +72,7 @@ if ($result) {
             </div>';
     }
 
-    require 'views/billing.view.php';
+    require '../views/billing.view.php';
 } else {
-    header('Location: login.php');
+    header('Location: ../login.php');
 }

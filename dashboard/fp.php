@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $randomString = str_shuffle($characters);
     $resetcode = substr($randomString, 0, 100);
     $errors = '';
-    require 'connection.php';
+    require '../connection.php';
 
     $statement = $connection->prepare('SELECT * FROM users WHERE email = :email LIMIT 1');
     $statement->execute(array(':email' => $email));
@@ -19,8 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = $result['user'];
         $eResetCode = $result['resetcode'];
 
-        require 'config.php';
-        require 'vendor/autoload.php';
+        require '../config.php';
+        require '../vendor/autoload.php';
         $title = 'Change your account password';
         $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
 
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <p style='margin-bottom: 20px;'>Hi dear <b>$user!</b> <br> </p>
                 <p>It seems that you forgot your account password. I will help you! As you can see, under this message you have a button, click there and you will get to a page where you must fill the gaps with your new password you want to put twice. If you want to get more information of how to reset your password, read this <a href='https://www.hexamarket.store/documentation/guides/account/account+recovery' style='color: #0062ff;font-weight: 700;text-decoration: none;'>article.</a><p>
                 <footer style='display: flex;flex-direction: column; align-items: center;'>
-                    <a href='https://hexamarket.store/fp2?email=$email&code=$eResetCode' style='text-decoration: none; color: rgb(255, 255, 255); background-color: rgb(0, 81, 255); padding: 12px; border-radius: 16px; font-weight: 600;'>Change password</a>
+                    <a href='https://hexamarket.store/dashboard/fp2?email=$email&code=$eResetCode' style='text-decoration: none; color: rgb(255, 255, 255); background-color: rgb(0, 81, 255); padding: 12px; border-radius: 16px; font-weight: 600;'>Change password</a>
                     <p class='sub' style='color: rgb(108, 108, 108);text-align: center;'>This mail was sent by Hexamarket for $user ($email)</p>
                     <div class='Hexamarket'>
                         <p style='font-weight: 900;font-size: 25px;margin-left: 10px;'>Hexamarket</p>
@@ -112,6 +112,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
 }
-require 'views/fp.view.php';
+require '../views/fp.view.php';
 
 ?>

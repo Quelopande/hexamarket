@@ -4,13 +4,13 @@ $user = $_SESSION['user'];
 
 $errors = '';
 
-require 'connection.php';
+require '../connection.php';
 
 $statement = $connection->prepare('SELECT * FROM users WHERE user = :user LIMIT 1');
 $statement->execute(array(':user' => $user));
 $result = $statement->fetch();
 
-$jsonString = file_get_contents('content.json');
+$jsonString = file_get_contents('../content.json');
 
 $data = json_decode($jsonString, true);
 $desiredUserId = $result['id'];
