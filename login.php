@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($result === false) {
             $errors .= '<div class="alert alert-danger d-flex align-items-center" role="alert">Username not found.</div>';
         } else {
-            require 'secure_pepper.php';
+            $pepper = getenv("pepper");
             $passPepper = $password . $pepper . $result['salt'];
 
             if (!password_verify($passPepper, $result['pass'])) {

@@ -55,7 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($eresult != false) {
       $errors .= '<div class="alert alert-danger d-flex align-items-center" role="alert"><svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg><div>This email is already in use! If you think that is an issue, contact the staff.</div></div>';
     }
-    require 'secure_pepper.php';
+
+    $pepper = getenv("pepper");
 
     $salt = openssl_random_pseudo_bytes(32);
     $passPepper = $password . $pepper . $salt;

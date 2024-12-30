@@ -3,10 +3,10 @@ session_start();
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
-
+$googleSecret = getenv("googleClientSecret");
 $google_client = new Google_Client();
 $google_client->setClientId('984657386074-ud52oefhvedl35t6jn7ophdpmehefkso.apps.googleusercontent.com');
-$google_client->setClientSecret('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');
+$google_client->setClientSecret("$googleSecret");
 $redirectUri = isset($_GET['link']) ? 
     "https://hexamarket.store/auth/google/index.php?link=" : 
     "https://hexamarket.store/auth/google/index.php";
