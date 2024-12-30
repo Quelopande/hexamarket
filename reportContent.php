@@ -180,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (file_put_contents('../../contentReports.json', $jsonData)) {
         // Prepare data for Discord webhook
         $title = basename(parse_url($requestUri, PHP_URL_PATH));
-        $webhookUrl = "https://discord.com/api/webhooks/1253693846651666520/lM5W_jdZfY8tBEU16EJkiMnN7HYBNnrYcHtafcgHRQqt_zFnQi6O-KZf9Mz96rXcrwUs";
+        $webhookUrl = getenv("reportContentWebhookUrl");
         $embed = array(
             "title" => $title,
             "description" => $description,

@@ -7,10 +7,6 @@ function getJSONData($filename) {
 function saveJSONData($filename, $data) {
     file_put_contents($filename, json_encode($data, JSON_PRETTY_PRINT));
 }
-function dbconnection() {
-    // Error founder identification number
-    return "U2FsdGVkX19NT++ikaVTvsZvjnhzLASJEj0QRHTkRbkQugA2/IvxbCEgsY7c05Hw";
-}
 $filename = $contentFile;
 $data = getJSONData($filename);
 
