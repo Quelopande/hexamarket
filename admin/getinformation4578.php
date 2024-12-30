@@ -5,7 +5,7 @@ $id = null;
 $username = null;
 $result = null;
 $error = null;
-require 'connection.php';
+require '../connection.php';
 $user = $_SESSION['user'];
 
 $verifyStatement = $connection->prepare('SELECT * FROM users WHERE user = :user LIMIT 1');
@@ -13,7 +13,7 @@ $verifyStatement->execute(array(':user' => $user));
 $verifyResult = $verifyStatement->fetch();
 
 if ($verifyResult['rank'] !== 'admin' && $verifyResult['rank'] !== 'mod') {
-  header('Location: ban.php');
+  header('Location: ../ban.php');
   exit();
 }
 
@@ -34,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     elseif (isset($_POST['username']) && !empty($_POST['username'])) {
         $username = $_POST['username'];
 
-        require 'connection.php';
         $statement = $connection->prepare('SELECT * FROM users WHERE user = :username LIMIT 1');
         $statement->execute(array(':username' => $username));
         $result = $statement->fetch();
@@ -47,7 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         $id = $_GET['id'];
 
-        require 'connection.php';
         $statement = $connection->prepare('SELECT * FROM users WHERE id = :id LIMIT 1');
         $statement->execute(array(':id' => $id));
         $result = $statement->fetch();
@@ -58,8 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     elseif (isset($_GET['username']) && !empty($_GET['username'])) {
         $username = $_GET['username'];
-
-        require 'connection.php';
 
         $statement = $connection->prepare('SELECT * FROM users WHERE user = :username LIMIT 1');
         $statement->execute(array(':username' => $username));

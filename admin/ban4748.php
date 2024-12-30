@@ -3,14 +3,14 @@ session_start();
 $user = $_SESSION['user'];
 $passErrors = '';
 
-require 'connection.php';
+require '../connection.php';
 
 $statement = $connection->prepare('SELECT * FROM users WHERE user = :user LIMIT 1');
 $statement->execute(array(':user' => $user));
 $result = $statement->fetch();
 $id = $result['id'];
 if ($result['rank'] !== 'admin' && $result['rank'] !== 'mod') {
-    header('Location: ban.php');
+    header('Location: ../ban.php');
     exit();
 }
 
@@ -29,8 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ':status' => $ban,
             ':rank' => $ban,
         ));
-    $webhookUrl = "https://discord.com/api/webhooks/1254118321943478414/EHr4sHfQEJaAjekhwvTWF0gZX-8K7LitukW67VIEi-OBLK9lOixF58o7fxWNbwqNA5de";
-
+    $webhookUrl = getenv("adminBansWebhook");
     $message = [
         'username'   => 'Admin log | Quelopande',
         'avatar_url' => 'https://www.hexamarket.store/assets/media/logo.webp',

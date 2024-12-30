@@ -1,31 +1,31 @@
 <?php
 session_start();
 if (!isset($_SESSION['user'])) {
-    header('Location: login.php');
+    header('Location: ../login.php');
     exit();
 }
 
 $user = $_SESSION['user'];
 $errors = '';
 
-require 'connection.php';
+require '../connection.php';
 
 $statement = $connection->prepare('SELECT * FROM users WHERE user = :user LIMIT 1');
 $statement->execute(array(':user' => $user));
 $result = $statement->fetch();
 $adminId = $result['id'];
 if (!$result) {
-    header('Location: login.php');
+    header('Location: ../login.php');
     exit();
 }
 
 if ($result['rank'] !== 'admin') {
-    header('Location: ban.php');
+    header('Location: ../ban.php');
     exit();
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $jsonString = file_get_contents('content.json');
+    $jsonString = file_get_contents('../content.json');
     $jsonData = json_decode($jsonString, true);
 
     $articleToDelete = filter_var(strtolower($_POST['ParticleId']), FILTER_SANITIZE_STRING);
@@ -74,8 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $updatedJson = json_encode($jsonData, JSON_PRETTY_PRINT);
     file_put_contents('content.json', $updatedJson);
 
-    $webhookUrl = 'https://discord.com/api/webhooks/1254018959112540170/m48yLjU9wWE4prQ0cwOOxGxf5lBb2pm9ElFzm8xfvSXqAzM9r2bBWdaq-NH6RSHn_R8Q';
-
+    $webhookUrl = getenv("adminArticleDeletionWebhook");
     $message = [
         'username'   => 'Admin log | Hexamarket',
         'avatar_url' => 'https://www.hexamarket.store/assets/media/logo.webp',

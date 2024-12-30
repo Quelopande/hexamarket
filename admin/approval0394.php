@@ -8,19 +8,19 @@ if (!isset($_SESSION['user'])) {
 
 $errors = '';
 
-require 'connection.php';
+require '../connection.php';
 
 $statement = $connection->prepare('SELECT * FROM users WHERE user = :user LIMIT 1');
 $statement->execute(array(':user' => $user));
 $result = $statement->fetch();
 $adminId = $result['id'];
 if (!$result) {
-    header('Location: auth');
+    header('Location: ../auth');
     exit();
 }
 
 if ($result['rank'] !== 'admin') {
-    header('Location: ban.php');
+    header('Location: ../ban.php');
     exit();
 } 
 
@@ -33,7 +33,7 @@ function saveJSONData($filename, $data) {
     file_put_contents($filename, json_encode($data, JSON_PRETTY_PRINT));
 }
 
-$filename = 'content.json';
+$filename = '../content.json';
 $data = getJSONData($filename);
 
 $date = new DateTime('now', new DateTimeZone('GMT'));
@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 echo "File deleted correctly.";
                             }
                         }
-                        $webhookUrl = "https://discord.com/api/webhooks/1261707923084804106/SuREawAb9Jr_cOUiWYXV49XxLHagEzbYvzT8tVLo-CL4l4WaqUwhvY2viXhwI99okogG";
+                        $webhookUrl = getenv("adminNotApprovedWebhook");
                         $message = [
                             'username'   => 'Admin log | Hexamarket',
                             'avatar_url' => 'https://www.hexamarket.store/assets/media/logo.webp',
@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             "$reason",
                             "$formattedDate"
                         ];
-                        $webhookUrl = "https://discord.com/api/webhooks/1261703437159239721/kXfqah5T48lgomY88a1o4qoaZJ3IY_CFq_QxJow3Nce3c_FMSFDwZka8f_jXZsWo4Vll";
+                        $webhookUrl = getenv("adminApprovedWebhook");
                         $message = [
                             'username'   => 'Admin log | Hexamarket',
                             'avatar_url' => 'https://www.hexamarket.store/assets/media/logo.webp',
