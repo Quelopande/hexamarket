@@ -1,7 +1,7 @@
 <?php
 session_start(); // Iniciar la sesión al principio del script (Default empty session: U2FsdGVkX1+uZiT8b0ZsR6NCO2ofWhNZXAYsiEg8FhF/OORTGBKgDOJWimWHZHSg)
 
-require "../keys.php";
+require "../../keys.php";
 
 $redirectUri = isset($_GET['link']) ? 
     "https://www.hexamarket.store/auth/discord?link" : 
@@ -82,7 +82,7 @@ $email = htmlspecialchars($userData['email']);
 $authDiscordId = htmlspecialchars($userData['id']);
 $authUsername = htmlspecialchars($userData['username']);
 
-require '../connection.php';
+require '../../connection.php';
 
 $statement = $connection->prepare('SELECT * FROM users WHERE email = :email LIMIT 1');
 $statement->execute(array(':email' => $email));
@@ -103,7 +103,7 @@ if(isset($user)){
     $hstatement->execute(array(':discordId' => $authDiscordId));
     $hresult = $hstatement->fetch();
     if($hresult){
-        header('../link?error=<i class="fa-brands fa-discord"></i> Discord ERROR: There is another account with the same Discord account linked.');
+        header('../../dashboard/link?error=<i class="fa-brands fa-discord"></i> Discord ERROR: There is another account with the same Discord account linked.');
     } else{    
         $statement = $connection->prepare('UPDATE users SET discordId = :discordId WHERE user = :user');
         $statement->execute(array(
@@ -163,6 +163,6 @@ if(isset($user)){
     }
 }
 $finalRedirection = isset($_GET['link']) ? 
-    "../link" : 
-    "../";
+    "../../link" : 
+    "../../";
 header($finalRedirection);

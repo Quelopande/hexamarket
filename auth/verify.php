@@ -159,5 +159,5 @@ require '../connection.php';
             echo 'An error occurred. Please try again later.';
         }
     }
-    require "views/verify.view.php";
+    require "../views/verify.view.php";
 ?>
