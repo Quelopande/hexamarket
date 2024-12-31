@@ -210,8 +210,8 @@ if ($result['status'] == 'verified') {
 } elseif ($result['status'] == 'notverified') {
     require '../views/nv.view.php';
 } elseif (!isset($_SESSION['user'])) {
-    header('Location: ../login');
+    header('Location: ../auth/login');
 } else {
-    require '../ban.php';
+    require '../auth/ban.php';
 }
 ?> 

@@ -7,12 +7,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $password2 = trim($_POST['password2']);
   $rank = 'user';
   $status = 'notverified';
-  $code=random_int(211111,999999);
+  $code = random_int(211111,999999);
 
   $errors = '';
 
-  require "keys.php";
-  require 'recaptcha.php';
+  require "../keys.php";
+  require '../recaptcha.php';
 
   $weakPasswords = array("password", "football", "basketball", "12345678", "123456789", "1234567890", "00000000", "11111111", "starwars", "qwertyuio", "qwerty123");
 
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors .= '<div class="alert alert-danger d-flex align-items-center" role="alert"><svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg><div>Invalid email address</div></div>';
   } else {
-    require 'connection.php';
+    require '../connection.php';
 
     $statement = $connection->prepare('SELECT * FROM users WHERE user = :user LIMIT 1');
     $statement->execute(array(':user' => $user));
@@ -91,10 +91,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   setcookie('user', $encryptedCookieValue, time() + 15 * 24 * 60 * 60, '/', '', true, true);
   $_SESSION['user'] = $user;
 
-  header('Location: auth');
+  header('Location: /');
     exit;
   }
 }
 
-require "vendor/dbMail.php";
-require 'views/signup.view.php';?>
+require "../vendor/dbMail.php";
+require '../views/signup.view.php';?>

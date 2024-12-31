@@ -3,7 +3,7 @@
 <?php
 session_start();
 
-require "keys.php";
+require "../keys.php";
 $show2FAForm = false;
 $errors = '';
 
@@ -28,23 +28,23 @@ if (isset($_COOKIE['user'])) {
     $decryptedUser = decryptCookie($_COOKIE['user']);
     if ($decryptedUser) {
         $_SESSION['user'] = $decryptedUser;
-        header('Location: /');
+        header('Location: ../');
         exit;
     }
 }
 
-require "vendor/dbMail.php";
+require "../vendor/dbMail.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = htmlspecialchars(strtolower(trim($_POST['user'])), ENT_QUOTES, 'UTF-8');
     $password = trim($_POST['password']);
     
-    require 'recaptcha.php';
+    require '../recaptcha.php';
 
     if (empty($user) || empty($password)) {
         $errors .= '<div class="alert alert-danger d-flex align-items-center" role="alert">Please, fill the gaps.</div>';
     } else {
-        require 'connection.php';
+        require '../connection.php';
 
         $statement = $connection->prepare('SELECT * FROM users WHERE user = :user LIMIT 1');
         $statement->execute([':user' => $user]);
@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($totpResult) {
             $show2FAForm = true;
-            require_once 'GoogleAuthenticator.php';
+            require_once '../GoogleAuthenticator.php';
             $ga = new PHPGangsta_GoogleAuthenticator();
 
             if (isset($_POST['code1'], $_POST['code2'], $_POST['code3'], $_POST['code4'], $_POST['code5'], $_POST['code6'])) {
@@ -100,11 +100,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $encryptedCookieValue = encryptCookie($user);
             setcookie('user', $encryptedCookieValue, time() + 15 * 24 * 60 * 60, '/', '', true, true, 'Strict'); // 15 days cookie
             $_SESSION['user'] = $user;
-            header("Location: /");
+            header("Location: ../");
             exit;
         }
     }
 }
 
-require 'views/login.view.php';
+require '../views/login.view.php';
 ?>

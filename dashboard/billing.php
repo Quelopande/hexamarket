@@ -1,8 +1,8 @@
 <?php session_start();
 $user = $_SESSION['user'];
 $errors = '';
-$h1 = '';  // Inicialización por si no se define en el código
-$orders = [];  // Definir como array vacío
+$h1 = ''; 
+$orders = [];
 
 
 require '../connection.php';

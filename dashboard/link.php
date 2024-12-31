@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if (isset($_SESSION['user'])){
   require '../views/link.view.php';
 } else if (!isset($_SESSION['user'])){
-  header('Location: ../login.php');
+  header('Location: ../auth/login');
 } else {
-header('Location: ../ban.php');
+header('Location: ../auth/ban');
 }

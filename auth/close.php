@@ -3,9 +3,9 @@
 // * Developer: Quelopande (quelopande.netlify.app)
 session_start();
 
-require "keys.php";
-require "connection.php";
-require "auth/google/config.php";
+require "../keys.php";
+require "../connection.php";
+require "../auth/google/config.php";
 
 function revokeDiscordToken($accessToken) {
     $url = "https://discord.com/api/v10/oauth2/token/revoke";

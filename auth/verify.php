@@ -5,12 +5,12 @@
 session_start();
 
 if (!isset($_SESSION['user'])) {
-    header('Location: login.php');
+    header('Location: login');
     exit;
 }
 
 $user = $_SESSION['user'];
-require 'connection.php';
+require '../connection.php';
 
     $statement = $connection->prepare('SELECT * FROM users WHERE user = :user LIMIT 1');
     $statement->execute(array(':user' => $user));
@@ -19,13 +19,13 @@ require 'connection.php';
     $sqlCode = $result['code'];
 
     if ($result === false || $result['status'] !== 'notverified') {
-        header('Location: login.php');
+        header('Location: login');
         exit;
     }
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $code = trim($_POST['code1'] . $_POST['code2'] . $_POST['code3'] . $_POST['code4'] . $_POST['code5'] . $_POST['code6']);
-        $ucode= random_int(211111,999999);
+        $ucode = random_int(211111,999999);
         $status = 'verified';
         $errors = '';
 

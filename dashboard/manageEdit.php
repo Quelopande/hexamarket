@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    $jsonString = file_get_contents('content.json');
+    $jsonString = file_get_contents('../content.json');
     $data = json_decode($jsonString, true);
 
     $articleUpdated = false;
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
 
                 $updatedJsonString = json_encode($data, JSON_PRETTY_PRINT);
-                file_put_contents('content.json', $updatedJsonString);
+                file_put_contents('../content.json', $updatedJsonString);
 
                 $articleUpdated = true;
                 break 2; 

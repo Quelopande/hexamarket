@@ -16,16 +16,16 @@ if (isset($_GET['signup'])) {
   if (isset($_SESSION['user'])){
     header('Location: ../dashboard');
   } else if (!isset($_SESSION['user'])){
-    header('Location: ../signup');
+    header('Location: signup');
   } else {
-  header('Location: ../ban');
+  header('Location: ban');
   }
 } else {
   if (isset($_SESSION['user'])){
     header('Location: ../dashboard');
   } else if (!isset($_SESSION['user'])){
-    header('Location: ../login');
+    header('Location: login');
   } else {
-  header('Location: ../ban');
+  header('Location: ban');
   }
 }

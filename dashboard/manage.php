@@ -145,12 +145,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 }
 
 if ($result['status'] == 'verified') {
-  require 'views/manage.view.php';
+  require '../views/manage.view.php';
 } elseif ($result['status'] == 'notverified') {
-  require 'views/nv.view.php';
+  require '../views/nv.view.php';
 } elseif (!isset($_SESSION['user'])) {
-  header('Location: login.php');
+  header('Location: ../auth/login');
 } else {
-  require 'ban.php';
+  require '../auth/ban';
 }
 ?>

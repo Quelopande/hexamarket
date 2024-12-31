@@ -166,13 +166,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               $emailErrors .= 'An error occurred while sending the email. Please try again.';
           }
 
-          header('Location: close.php');
+          header('Location: ../auth/close');
       }
   }
 }
 
 if($_GET['setbanner'] || $_GET['theme']){
-  $jsonFile = "content.json";
+  $jsonFile = "../content.json";
   $jsonString = @file_get_contents($jsonFile);
   if ($jsonString === false) {
       throw new Exception('Unable to read ' . $jsonFile);
@@ -208,7 +208,7 @@ if($_GET['setbanner'] || $_GET['theme']){
 if (isset($_SESSION['user'])){
   require '../views/settings.view.php';
 } else if (!isset($_SESSION['user'])){
-  header('Location: ../login.php');
+  header('Location: ../auth/login');
 } else {
-header('Location: ../ban.php');
+header('Location: ../auth/ban');
 }

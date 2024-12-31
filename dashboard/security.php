@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $passwordCode =  htmlspecialchars(strtolower(trim($_POST['passCode'])), ENT_QUOTES, 'UTF-8');
     $newCode= random_int(211111,999999);
 
-    require 'secure_pepper.php';
+    $pepper = getenv("pepper");
     $oldPassPepper = $oldPassword . $pepper . $result['salt'];
     $passPepper = $newPassword . $pepper . $result['salt'];
     $hash = password_hash($passPepper, PASSWORD_BCRYPT, ['cost' => 12]);
@@ -48,16 +48,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             elseif(in_array(strtolower($newPassword), $weakPasswords) || (strlen($newPassword) < 2)){
             $passErrors .= 'The password is too weak. The password must have more than 8 characters. And the password must be secure';
             } else {
-              header('Location: close.php'); 
+              header('Location: ../auth/close.php'); 
               $statement = $connection->prepare('UPDATE users SET pass = :pass, code = :code WHERE id = :id');
               $statement->execute(array(
                 ':id' => $id,
                 ':pass' => $hash,
                 ':code' => $newCode,
               ));
-            require 'config.php';
-            require 'vendor/autoload.php';
-            require "vendor/dbMail.php";
+            require '../config.php';
+            require '../vendor/autoload.php';
+            require "../vendor/dbMail.php";
             $title = 'Password has been changed';
               $message = "
               <html>
@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if (isset($_SESSION['user'])){
   require '../views/security.view.php';
 } else if (!isset($_SESSION['user'])){
-  header('Location: ../login.php');
+  header('Location: ../auth/login');
 } else {
-header('Location: ../ban.php');
+header('Location: ../auth/ban');
 }
