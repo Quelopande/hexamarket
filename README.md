@@ -1,2 +1,3 @@
 [![License: CC BY-ND 4.0](https://licensebuttons.net/l/by-nd/4.0/80x15.png)](http://creativecommons.org/licenses/by-nd/4.0/)
 [![License: CC BY-ND 4.0](https://img.shields.io/badge/License-CC%20BY--ND%204.0-lightgrey.svg)](http://creativecommons.org/licenses/by-nd/4.0/)
+This repositorie is under CC BY-ND 4.0 License. This is a platform were you can upload different resources of different games. There is only one paying method that is Paypal for allows tranfer as much as possible money to the publisher amount.
