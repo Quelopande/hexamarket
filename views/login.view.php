@@ -166,7 +166,6 @@
 		<form action="" method="post" class="otpform">
 			<h1>2 factor authentication code</h1>
 			<input type="hidden" name="user" value="<?php echo htmlspecialchars($user); ?>">
-			<input type="hidden" name="password" value="<?php echo htmlspecialchars($password); ?>">
 			<input type="hidden" name="token" id="token2FA" />
 			<div class="otp-container">
 				<input type="text" name="code1" class="otp-input" maxlength="1" required>
